@@ -58,8 +58,6 @@ export const properties = [
     garage: 2,
     yearBuilt: 2022,
     image: "/images/property/house-5.jpg",
-    tint: "from-emerald-950/95 via-emerald-900/60",
-    button: "bg-emerald-800/50 hover:bg-emerald-500",
     summary: "A sculpted white villa framed by the Sierra Blanca mountains.",
     description: [
       "Sierra Vista Estate is a masterpiece of Mediterranean minimalism, set on a private plot with uninterrupted views of the Sierra Blanca mountains. Floor-to-ceiling glass dissolves the boundary between the warm, light-filled interiors and landscaped gardens.",
@@ -91,8 +89,6 @@ export const properties = [
     garage: 3,
     yearBuilt: 2021,
     image: "/images/property/island-retreat.jpg",
-    tint: "from-slate-950/95 via-slate-900/60",
-    button: "bg-slate-700/50 hover:bg-slate-500",
     summary: "Ocean-front modernism with a mirror-still reflecting pool.",
     description: [
       "Island Retreat captures the essence of California coastal living. Clean architectural lines, a cantilevered roof and walls of glass frame dramatic sunset views over the Pacific.",
@@ -124,8 +120,6 @@ export const properties = [
     garage: 2,
     yearBuilt: 2020,
     image: "/images/property/house-4.jpg",
-    tint: "from-cyan-950/95 via-cyan-900/60",
-    button: "bg-cyan-800/50 hover:bg-cyan-500",
     summary: "Whitewashed island villa with a glowing lap pool at dusk.",
     description: [
       "Azure Pool Villa blends traditional Ibicenco architecture with contemporary comfort. Its pitched white roofs and warm interiors glow at dusk above a long turquoise lap pool.",
@@ -157,8 +151,6 @@ export const properties = [
     garage: 2,
     yearBuilt: 2019,
     image: "/images/property/serenity-tower.jpg",
-    tint: "from-amber-950/95 via-amber-900/60",
-    button: "bg-amber-800/50 hover:bg-amber-500",
     summary: "Desert-modern retreat in board-formed concrete and glass.",
     description: [
       "Serenity Tower is a desert-modern sanctuary crafted from board-formed concrete, steel and glass. Oversized sliding doors open the living spaces onto a xeriscaped courtyard.",
@@ -190,8 +182,6 @@ export const properties = [
     garage: 1,
     yearBuilt: 2018,
     image: "/images/property/mountain-lodge.jpg",
-    tint: "from-stone-950/95 via-stone-800/60",
-    button: "bg-stone-700/50 hover:bg-stone-500",
     summary: "Elegant three-level residence in a quiet Zurich hillside.",
     description: [
       "Mountain Lodge is a refined three-level residence on one of Zurich's most sought-after hillside streets. Layered terraces and glass balustrades give every floor its own outdoor space.",

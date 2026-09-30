@@ -13,7 +13,7 @@ export const ArrowIcon = ({ className = "" }) => (
 
 const PropertyCard = ({ property, className = "" }) => {
   const [liked, setLiked] = useState(false);
-  const { slug, name, location, code, price, beds, baths, area, image, tint, button, status } = property;
+  const { slug, name, location, code, price, beds, baths, area, image, status } = property;
 
   return (
     <article data-animate="fade-up" className={`group relative h-[440px] overflow-hidden rounded-3xl shadow-lg shadow-slate-900/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:h-[480px] ${className}`}>
@@ -25,8 +25,8 @@ const PropertyCard = ({ property, className = "" }) => {
         className="object-cover transition-transform duration-700 group-hover:scale-110"
       />
 
-      {/* Colour tint from bottom */}
-      <div className={`absolute inset-0 bg-gradient-to-t ${tint} to-transparent`} />
+      {/* Neutral shade behind the text for readability */}
+      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
 
       {/* Top badges */}
       <div className="absolute inset-x-4 top-4 z-10 flex items-center justify-between">
@@ -60,7 +60,7 @@ const PropertyCard = ({ property, className = "" }) => {
 
         <Link
           href={`/properties/${slug}`}
-          className={`mt-5 flex items-center justify-between rounded-xl px-5 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-colors duration-300 ${button}`}
+          className={`mt-5 flex items-center justify-between rounded-xl px-5 py-3.5 text-sm font-semibold text-white bg-white/15 backdrop-blur-md transition-colors duration-300 hover:bg-emerald-500`}
         >
           View Property
           <ArrowIcon className="transition-transform duration-300 group-hover:translate-x-1" />
