@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Navbar from "../../components/Navbar";
 import PropertyCard, { ArrowIcon } from "../../components/PropertyCard";
 import PropertyGallery from "../../components/property/PropertyGallery";
 import MortgageCalculator from "../../components/property/MortgageCalculator";
@@ -91,7 +90,6 @@ export default async function PropertyPage({ params }) {
 
   return (
     <>
-      <Navbar />
       <main className="bg-stone-50">
         {/* Header + gallery */}
         <section className="bg-linear-to-b from-stone-950 from-65% to-stone-50 to-65% pt-28 sm:pt-32">

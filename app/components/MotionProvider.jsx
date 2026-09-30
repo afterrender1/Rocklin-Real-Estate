@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
@@ -45,12 +45,14 @@ const reveal = (targets, extra = {}) =>
 
 const MotionProvider = ({ children }) => {
   const pathname = usePathname();
+  const lenisRef = useRef(null);
 
   // Lenis smooth scroll, driven by GSAP's ticker so ScrollTrigger stays in sync
   useEffect(() => {
     if (!shouldSmoothScroll()) return;
 
     const lenis = new Lenis({ lerp: 0.1, anchors: { offset: -80 }, autoRaf: false });
+    lenisRef.current = lenis;
     const raf = (time) => lenis.raf(time * 1000);
 
     lenis.on("scroll", ScrollTrigger.update);
@@ -60,8 +62,14 @@ const MotionProvider = ({ children }) => {
     return () => {
       gsap.ticker.remove(raf);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
+
+  // New page: jump to top instantly so Lenis does not smooth-scroll from the old position
+  useEffect(() => {
+    if (!window.location.hash) lenisRef.current?.scrollTo(0, { immediate: true, force: true });
+  }, [pathname]);
 
   // Re-run reveal animations whenever the route changes
   useGSAP(

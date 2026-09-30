@@ -1,5 +1,6 @@
 import { Manrope } from "next/font/google";
 import MotionProvider from "./components/MotionProvider";
+import Navbar from "./components/Navbar";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -23,7 +24,10 @@ export default function RootLayout({ children }) {
         </noscript>
       </head>
       <body suppressHydrationWarning className="min-h-full flex flex-col font-sans">
-        <MotionProvider>{children}</MotionProvider>
+        <MotionProvider>
+          <Navbar />
+          {children}
+        </MotionProvider>
       </body>
     </html>
   );

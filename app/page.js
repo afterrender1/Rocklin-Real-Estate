@@ -1,16 +1,16 @@
-import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import WorkProcess from "./components/WorkProcess";
 import LuxuryHomes from "./components/LuxuryHomes";
+import Faq from "./components/Faq";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
       <main>
         <Hero />
         <WorkProcess />
         <LuxuryHomes />
+        <Faq />
       </main>
     </>
   );

@@ -10,33 +10,62 @@ const allImages = [
 // Main image first, then the rest of the pool as gallery shots
 const galleryFor = (image) => [image, ...allImages.filter((img) => img !== image)].slice(0, 5);
 
-const baseAgents = {
+export const agents = {
   sarah: {
+    id: "sarah",
     name: "Sarah Mitchell",
     role: "Senior Property Consultant",
+    office: "Los Angeles, US",
     phone: "+1 (310) 555-0142",
     email: "sarah@skyline.estate",
     initials: "SM",
     listings: 48,
     rating: 4.9,
+    experience: 12,
+    languages: ["English", "French"],
+    bio: "Sarah has spent over a decade matching buyers with coastal and desert homes across Southern California.",
   },
   daniel: {
+    id: "daniel",
     name: "Daniel Ortega",
     role: "Luxury Homes Specialist",
+    office: "Marbella, ES",
     phone: "+34 612 555 019",
     email: "daniel@skyline.estate",
     initials: "DO",
     listings: 36,
     rating: 4.8,
+    experience: 9,
+    languages: ["Spanish", "English", "German"],
+    bio: "Daniel specialises in Mediterranean villas and helps international buyers navigate the Spanish market.",
   },
   lena: {
+    id: "lena",
     name: "Lena Fischer",
     role: "International Sales Director",
+    office: "Zurich, CH",
     phone: "+41 44 555 0187",
     email: "lena@skyline.estate",
     initials: "LF",
     listings: 52,
     rating: 5.0,
+    experience: 15,
+    languages: ["German", "English", "Italian"],
+    bio: "Lena leads our international team and advises investors on premium residential property in Switzerland.",
+  },
+  omar: {
+    id: "omar",
+    name: "Omar Haddad",
+    role: "Investment Advisor",
+    office: "Dubai, AE",
+    phone: "+971 4 555 0193",
+    email: "omar@skyline.estate",
+    initials: "OH",
+    listings: 29,
+    rating: 4.9,
+    experience: 8,
+    languages: ["Arabic", "English", "Urdu"],
+    bio: "Omar helps clients build rental and resale portfolios with a focus on long-term returns.",
   },
 };
 
@@ -70,7 +99,7 @@ export const properties = [
       { name: "Los Naranjos Golf Club", distance: "6 min drive" },
       { name: "Málaga Airport", distance: "40 min drive" },
     ],
-    agent: baseAgents.daniel,
+    agent: agents.daniel,
   },
   {
     id: 2,
@@ -101,7 +130,7 @@ export const properties = [
       { name: "Pepperdine University", distance: "12 min drive" },
       { name: "Santa Monica", distance: "30 min drive" },
     ],
-    agent: baseAgents.sarah,
+    agent: agents.sarah,
   },
   {
     id: 3,
@@ -132,7 +161,7 @@ export const properties = [
       { name: "Ibiza Airport", distance: "15 min drive" },
       { name: "Sant Josep Village", distance: "5 min drive" },
     ],
-    agent: baseAgents.daniel,
+    agent: agents.daniel,
   },
   {
     id: 4,
@@ -163,7 +192,7 @@ export const properties = [
       { name: "Palm Springs Airport", distance: "10 min drive" },
       { name: "Aerial Tramway", distance: "12 min drive" },
     ],
-    agent: baseAgents.sarah,
+    agent: agents.sarah,
   },
   {
     id: 5,
@@ -194,7 +223,7 @@ export const properties = [
       { name: "University Hospital", distance: "8 min drive" },
       { name: "International School", distance: "15 min drive" },
     ],
-    agent: baseAgents.lena,
+    agent: agents.lena,
   },
 ].map((p) => ({ ...p, gallery: galleryFor(p.image) }));
 
@@ -204,3 +233,5 @@ export const formatPrice = (value) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(value);
 
 export const formatNumber = (value) => new Intl.NumberFormat("en-US").format(value);
+
+export const getAgentListings = (agentId) => properties.filter((p) => p.agent.id === agentId);

@@ -2,6 +2,18 @@
 
 @theme {
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --animate-fade-in: fade-in 0.35s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 html {
@@ -17,5 +29,53 @@ html.lenis {
 @media (prefers-reduced-motion: no-preference) {
   [data-animate]:not([data-animate="hero-bg"]) {
     opacity: 0;
+  }
+}
+
+/* ---------- Page transitions (React ViewTransition) ---------- */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(.page-exit) {
+  animation: 180ms ease-in both page-out;
+}
+
+::view-transition-new(.page-enter) {
+  animation: 320ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both page-in;
+}
+
+/* Keep the fixed navbar still while the page content changes */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

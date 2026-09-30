@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Navbar from "../components/Navbar";
 import PropertyCard from "../components/PropertyCard";
 import { properties } from "../data/properties";
 
@@ -11,7 +10,6 @@ export const metadata = {
 export default function PropertiesPage() {
   return (
     <>
-      <Navbar />
       <main className="bg-stone-50">
         <section className="bg-stone-950 pb-16 pt-32 sm:pb-20 sm:pt-36">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
