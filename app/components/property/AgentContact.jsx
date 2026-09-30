@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 const inputClass =
   "w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10";
@@ -19,9 +20,19 @@ const AgentContact = ({ agent, propertyName }) => {
     <div className="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-xl shadow-stone-900/5">
       {/* Agent */}
       <div className="flex items-center gap-4 border-b border-stone-100 p-6">
-        <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-emerald-500 to-emerald-700 text-lg font-bold text-white">
-          {agent.initials}
-        </div>
+        {agent.image ? (
+          <Image
+            src={agent.image}
+            alt={agent.name}
+            width={56}
+            height={56}
+            className="h-14 w-14 shrink-0 rounded-full object-cover object-[50%_20%] ring-2 ring-emerald-500/30"
+          />
+        ) : (
+          <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-emerald-500 to-emerald-700 text-lg font-bold text-white">
+            {agent.initials}
+          </div>
+        )}
         <div className="min-w-0 flex-1">
           <p className="truncate font-semibold text-stone-900">{agent.name}</p>
           <p className="truncate text-sm text-stone-500">{agent.role}</p>
