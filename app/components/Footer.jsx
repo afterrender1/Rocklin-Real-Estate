@@ -34,8 +34,8 @@ const icon = (d) => (
 );
 
 const contacts = [
-  { label: "hello@skyline.estate", href: "mailto:hello@skyline.estate", icon: icon(<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>) },
-  { label: "+1 (310) 555-0100", href: "tel:+13105550100", icon: icon(<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" />) },
+  { label: "arham@afterrender.com", href: "mailto:arham@afterrender.com", icon: icon(<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>) },
+  { label: "+1 (307) 667-7665", href: "tel:+13076677665", icon: icon(<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" />) },
   { label: "Beverly Hills, CA", href: "/contact", icon: icon(<><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z" /><circle cx="12" cy="9.5" r="2.5" /></>) },
 ];
 
@@ -143,7 +143,7 @@ const Footer = () => (
         </div>
 
         <div className="flex flex-col gap-4 border-t border-stone-200 py-6 text-sm text-stone-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Skyline Real Estate. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Devskarnel. All rights reserved.</p>
           <a href="#top" className="inline-flex items-center gap-2 font-medium text-stone-700 transition-colors hover:text-emerald-600">
             Back to top
             <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

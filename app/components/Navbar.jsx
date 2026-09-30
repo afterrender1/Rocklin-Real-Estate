@@ -270,8 +270,8 @@ const Navbar = () => {
               Get In Touch
             </Link>
             <div className="flex flex-col gap-1 text-sm text-white/60">
-              <a href="tel:+13105550100" className="transition-colors hover:text-emerald-300">+1 (310) 555-0100</a>
-              <a href="mailto:hello@skyline.estate" className="transition-colors hover:text-emerald-300">hello@skyline.estate</a>
+              <a href="tel:+13076677665" className="transition-colors hover:text-emerald-300">+1 (307) 667-7665</a>
+              <a href="mailto:arham@afterrender.com" className="transition-colors hover:text-emerald-300">arham@afterrender.com</a>
             </div>
           </div>
         </aside>
