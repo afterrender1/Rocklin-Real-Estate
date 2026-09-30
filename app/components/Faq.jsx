@@ -68,18 +68,22 @@ const Faq = ({ hideHeading = false }) => {
           </div>
         )}
 
-        <div className={`grid gap-8 lg:grid-cols-[260px_1fr] lg:gap-14 ${hideHeading ? "" : "mt-12 sm:mt-16"}`}>
+        <div className={`grid grid-cols-[minmax(0,1fr)] gap-6 sm:gap-8 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-14 ${hideHeading ? "" : "mt-12 sm:mt-16"}`}>
           {/* Categories */}
-          <nav data-animate="left" aria-label="FAQ categories" className="lg:sticky lg:top-28 lg:self-start">
+          <nav data-animate="left" aria-label="FAQ categories" className="relative min-w-0 lg:sticky lg:top-28 lg:self-start">
             <p className="mb-4 hidden text-sm font-semibold uppercase tracking-wider text-emerald-700 lg:block">Categories</p>
-            <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
+            <ul className="-mx-4 flex snap-x gap-2 overflow-x-auto scroll-px-4 px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
               {faqCategories.map((c) => {
                 const active = c.id === activeCat;
                 return (
-                  <li key={c.id} className="shrink-0">
+                  <li key={c.id} className="shrink-0 snap-start lg:shrink">
                     <button
                       type="button"
-                      onClick={() => selectCategory(c.id)}
+                      onClick={(e) => {
+                        selectCategory(c.id);
+                        // On phones, slide the tapped pill fully into view
+                        e.currentTarget.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+                      }}
                       aria-current={active ? "true" : undefined}
                       className={`w-full whitespace-nowrap rounded-full border px-4 py-2 text-left text-sm transition-colors lg:rounded-none lg:border-0 lg:border-l-2 lg:py-2.5 ${
                         active
@@ -93,10 +97,12 @@ const Faq = ({ hideHeading = false }) => {
                 );
               })}
             </ul>
+            {/* Hint that the pill row scrolls sideways */}
+            <span aria-hidden="true" className="pointer-events-none absolute -right-4 top-0 h-[calc(100%-0.5rem)] w-10 bg-gradient-to-l from-white to-transparent sm:-right-6 lg:hidden" />
           </nav>
 
           {/* Questions */}
-          <div data-animate="fade-up">
+          <div data-animate="fade-up" className="min-w-0">
             <ul key={activeCat} className="animate-fade-in space-y-3">
               {category.faqs.map((item, i) => {
                 const open = openIndex === i;
@@ -114,9 +120,9 @@ const Faq = ({ hideHeading = false }) => {
                         onClick={() => setOpenIndex(open ? -1 : i)}
                         aria-expanded={open}
                         aria-controls={panelId}
-                        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-6 sm:py-5"
+                        className="flex w-full items-start justify-between gap-3 px-4 py-4 text-left sm:items-center sm:gap-4 sm:px-6 sm:py-5"
                       >
-                        <span className={`text-base sm:text-lg ${open ? "font-semibold text-stone-900" : "text-stone-700"}`}>{item.q}</span>
+                        <span className={`min-w-0 text-[15px] leading-snug sm:text-lg ${open ? "font-semibold text-stone-900" : "text-stone-700"}`}>{item.q}</span>
                         <span
                           className={`relative grid h-8 w-8 shrink-0 place-items-center rounded-full transition-colors ${
                             open ? "bg-emerald-500 text-white" : "bg-white text-stone-700"
@@ -133,7 +139,7 @@ const Faq = ({ hideHeading = false }) => {
                       className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
                     >
                       <div className="overflow-hidden">
-                        <p className="px-5 pb-5 text-sm leading-relaxed text-stone-600 sm:px-6 sm:pb-6 sm:text-base">{item.a}</p>
+                        <p className="px-4 pb-5 text-sm leading-relaxed text-stone-600 sm:px-6 sm:pb-6 sm:text-base">{item.a}</p>
                       </div>
                     </div>
                   </li>
@@ -142,7 +148,7 @@ const Faq = ({ hideHeading = false }) => {
             </ul>
 
             {/* Still have a question */}
-            <div className="mt-8 flex flex-col gap-5 rounded-2xl bg-stone-900 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+            <div className="mt-8 flex flex-col gap-5 rounded-2xl bg-stone-900 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
               <div className="flex items-start gap-4">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
                   <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -158,7 +164,7 @@ const Faq = ({ hideHeading = false }) => {
               </div>
               <Link
                 href="/contact"
-                className="inline-flex shrink-0 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-stone-900 transition hover:bg-emerald-500 hover:text-white"
+                className="inline-flex w-full shrink-0 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-stone-900 transition sm:w-auto hover:bg-emerald-500 hover:text-white"
               >
                 Contact Us
               </Link>
