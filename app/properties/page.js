@@ -18,7 +18,7 @@ export default function PropertiesPage() {
               <span>/</span>
               <span className="text-white">Properties</span>
             </nav>
-            <h1 data-animate="hero" className="mt-5 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+            <h1 data-animate="hero" className="mt-5 text-[2rem] font-semibold leading-[1.1] tracking-tight text-white min-[400px]:text-4xl sm:text-5xl">
               All{" "}
               <span className="bg-gradient-to-r from-emerald-400 to-emerald-200 bg-clip-text text-transparent">Properties</span>
             </h1>

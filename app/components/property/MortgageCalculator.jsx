@@ -5,7 +5,7 @@ import { formatPrice } from "../../data/properties";
 
 const Slider = ({ label, value, display, min, max, step, onChange }) => (
   <label className="block">
-    <span className="flex items-center justify-between text-sm">
+    <span className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-sm">
       <span className="text-stone-500">{label}</span>
       <span className="font-semibold text-stone-900">{display}</span>
     </span>

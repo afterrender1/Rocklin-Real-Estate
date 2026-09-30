@@ -79,3 +79,24 @@ html.lenis {
     animation-delay: 0s !important;
   }
 }
+
+/* ---------- Responsive typography & layout safety ---------- */
+@layer base {
+  body {
+    /* Stops decorative blobs from causing sideways scroll; `clip` keeps sticky elements working */
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+}

@@ -10,7 +10,7 @@ const PageHeader = ({ title, highlight, description, crumb }) => (
         <span>/</span>
         <span className="text-white">{crumb}</span>
       </nav>
-      <h1 data-animate="hero" className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+      <h1 data-animate="hero" className="mt-5 max-w-3xl text-[2rem] font-semibold leading-[1.1] tracking-tight text-white min-[400px]:text-4xl sm:text-5xl">
         {title}{" "}
         {highlight && (
           <span className="bg-gradient-to-r from-emerald-400 to-emerald-200 bg-clip-text text-transparent">{highlight}</span>

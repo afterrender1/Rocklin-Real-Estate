@@ -13,6 +13,14 @@ const manrope = Manrope({
 export const metadata = {
   title: "Skyline Real Estate",
   description: "Your trusted guide to finding your dream home.",
+  applicationName: "Skyline Real Estate",
+  openGraph: {
+    type: "website",
+    siteName: "Skyline Real Estate",
+    title: "Skyline Real Estate",
+    description: "Your trusted guide to finding your dream home.",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }) {

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import ShaderBackground from "./ShaderBackground";
 import { properties } from "../data/properties";
@@ -55,7 +56,7 @@ const Footer = () => (
       <ShaderBackground className="-z-20" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.35),rgba(0,0,0,0.1)_70%)]" />
 
-      <h2 className="mx-auto max-w-2xl text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">
+      <h2 className="mx-auto max-w-2xl text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-white sm:text-4xl lg:text-5xl">
         Ready to find your dream home?
       </h2>
       <p className="mx-auto mt-4 max-w-xl text-base text-white/80 sm:text-lg">
@@ -81,15 +82,8 @@ const Footer = () => (
     <div className="mx-auto mt-3 max-w-[96rem] rounded-3xl border border-stone-200 bg-stone-50 sm:mt-4">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="flex flex-col gap-4 border-b border-stone-200 py-10 sm:flex-row sm:items-center sm:justify-between">
-          <Link href="/" className="flex items-center gap-2 text-stone-900">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-emerald-600 text-white">
-              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 11l9-7 9 7" />
-                <path d="M5 10v10h14V10" />
-                <path d="M10 20v-6h4v6" />
-              </svg>
-            </span>
-            <span className="text-xl font-bold tracking-[0.18em]">SKYLINE</span>
+          <Link href="/" aria-label="Skyline Real Estate home" className="inline-flex">
+            <Image src="/logo/logo-horizontal-dark.webp" alt="Skyline Real Estate" width={953} height={240} className="h-11 w-auto sm:h-12" />
           </Link>
           <p className="text-sm text-stone-600">Your trusted guide to finding your dream home.</p>
         </div>

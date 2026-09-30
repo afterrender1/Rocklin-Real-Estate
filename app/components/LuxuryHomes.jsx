@@ -24,7 +24,7 @@ const LuxuryHomes = () => {
             <span className="inline-block rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm tracking-wide text-emerald-700">
               Featured Listings
             </span>
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl lg:text-5xl">
+            <h2 className="mt-5 text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-stone-900 sm:text-4xl lg:text-5xl">
               Luxury Homes{" "}
               <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
                 For Sale

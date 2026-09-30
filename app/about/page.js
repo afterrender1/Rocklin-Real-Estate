@@ -71,7 +71,7 @@ export default function AboutPage() {
             <span className="inline-block rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm tracking-wide text-emerald-700">
               Our Story
             </span>
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+            <h2 className="mt-5 text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-stone-900 sm:text-4xl">
               From a small office to a{" "}
               <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">global network</span>
             </h2>
@@ -101,7 +101,7 @@ export default function AboutPage() {
       <section className="bg-stone-50 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div data-animate="fade-up" className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+            <h2 className="text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-stone-900 sm:text-4xl">
               What We{" "}
               <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">Stand For</span>
             </h2>

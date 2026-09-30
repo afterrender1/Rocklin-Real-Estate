@@ -93,14 +93,22 @@ const MotionProvider = ({ children }) => {
         .toArray("[data-animate]")
         .filter((el) => !["hero", "hero-bg"].includes(el.dataset.animate));
 
+      // Sideways slides would poke past the screen edge on phones, so use fade-up there
+      const wide = window.matchMedia("(min-width: 1024px)").matches;
       items.forEach((el) => {
-        gsap.set(el, { ...(variants[el.dataset.animate] || variants["fade-up"]), transition: "none" });
+        let variant = el.dataset.animate;
+        if (!wide && (variant === "left" || variant === "right")) variant = "fade-up";
+        gsap.set(el, { ...(variants[variant] || variants["fade-up"]), transition: "none" });
       });
 
       ScrollTrigger.batch(items, {
         start: "top 88%",
         once: true,
         onEnter: (batch) => reveal(batch),
+        // Coming back up from below also reveals
+        onEnterBack: (batch) => reveal(batch),
+        // Flung past too fast to animate: just show it, no tween needed
+        onLeave: (batch) => gsap.set(batch, { opacity: 1, x: 0, y: 0, scale: 1, clearProps: "transform,transition" }),
       });
     },
     { dependencies: [pathname], revertOnUpdate: true }

@@ -42,7 +42,7 @@ const icons = {
 };
 
 const Section = ({ title, children, id }) => (
-  <section id={id} data-animate="fade-up" className="scroll-mt-28 rounded-3xl border border-stone-200 bg-white p-6 sm:p-8">
+  <section id={id} data-animate="fade-up" className="scroll-mt-28 rounded-3xl border border-stone-200 bg-white p-5 sm:p-8">
     <h2 className="flex items-center gap-3 text-xl font-semibold text-stone-900 sm:text-2xl">
       <span className="h-6 w-1 rounded-full bg-emerald-500" />
       {title}
@@ -108,7 +108,7 @@ export default async function PropertyPage({ params }) {
                   <span className="rounded-full bg-emerald-500 px-3 py-1 text-xs font-semibold text-white">{status}</span>
                   <span className="rounded-full border border-white/20 px-3 py-1 text-xs font-medium text-white/80">{type}</span>
                 </div>
-                <h1 className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{name}</h1>
+                <h1 className="mt-4 text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-white sm:text-4xl lg:text-5xl">{name}</h1>
                 <p className="mt-3 flex items-start gap-2 text-sm text-white/70 sm:text-base">
                   <span className="mt-0.5 text-emerald-400">{icons.pin}</span>
                   {address}
@@ -131,10 +131,10 @@ export default async function PropertyPage({ params }) {
         <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
           <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {facts.map((f) => (
-              <li key={f.label} data-animate="fade-up" className="flex items-center gap-3 rounded-2xl border border-stone-200 bg-white p-4 transition hover:border-emerald-400">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700">{f.icon}</span>
+              <li key={f.label} data-animate="fade-up" className="flex items-center gap-2.5 rounded-2xl border border-stone-200 bg-white p-3 transition hover:border-emerald-400 sm:gap-3 sm:p-4">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700 sm:h-10 sm:w-10">{f.icon}</span>
                 <span className="min-w-0">
-                  <span className="block truncate text-base font-semibold text-stone-900">{f.value}</span>
+                  <span className="block truncate text-sm font-semibold text-stone-900 sm:text-base">{f.value}</span>
                   <span className="block text-xs text-stone-500">{f.label}</span>
                 </span>
               </li>
@@ -144,7 +144,7 @@ export default async function PropertyPage({ params }) {
 
         {/* Main content */}
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-3 lg:px-8 lg:py-14">
-          <div className="space-y-6 lg:col-span-2">
+          <div className="min-w-0 space-y-6 lg:col-span-2">
             <Section title="Overview" id="overview">
               <p className="text-lg font-medium text-stone-900">{summary}</p>
               <div className="mt-4 space-y-4 leading-relaxed text-stone-600">
@@ -205,7 +205,7 @@ export default async function PropertyPage({ params }) {
           </div>
 
           {/* Sidebar */}
-          <aside data-animate="right" className="lg:sticky lg:top-24 lg:self-start">
+          <aside data-animate="right" className="min-w-0 lg:sticky lg:top-24 lg:self-start">
             <AgentContact agent={agent} propertyName={name} />
           </aside>
         </div>
@@ -214,7 +214,7 @@ export default async function PropertyPage({ params }) {
         <section className="border-t border-stone-200 bg-white py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-animate="fade-up" className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <h2 className="text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+              <h2 className="text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-stone-900 sm:text-4xl">
                 Similar{" "}
                 <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">Properties</span>
               </h2>

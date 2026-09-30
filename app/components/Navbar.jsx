@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -22,21 +23,21 @@ const isActive = (pathname, href) => (href === "/" ? pathname === "/" : pathname
 const isLinkActive = (pathname, link) =>
   link.children ? link.children.some((c) => isActive(pathname, c.href)) : isActive(pathname, link.href);
 
-const Logo = () => (
-  <Link href="/" className="flex items-center gap-2 text-white">
-    <span className="grid h-9 w-9 place-items-center rounded-full border-2 border-white">
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 11l9-7 9 7" />
-        <path d="M5 10v10h14V10" />
-        <path d="M10 20v-6h4v6" />
-      </svg>
-    </span>
-    <span className="text-xl font-bold tracking-[0.18em] sm:text-2xl">SKYLINE</span>
+const Logo = ({ onClick, preload = false }) => (
+  <Link href="/" onClick={onClick} aria-label="Skyline Real Estate home" className="flex shrink-0 items-center">
+    <Image
+      src="/logo/logo-horizontal-light.webp"
+      alt="Skyline Real Estate"
+      width={953}
+      height={240}
+      preload={preload}
+      className="h-9 w-auto sm:h-10"
+    />
   </Link>
 );
 
 const Chevron = ({ className = "" }) => (
-  <svg viewBox="0 0 20 20" fill="currentColor" className={`h-4 w-4 transition-transform ${className}`}>
+  <svg viewBox="0 0 20 20" fill="currentColor" className={`h-4 w-4 transition-transform ${className}`} aria-hidden="true">
     <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
   </svg>
 );
@@ -48,9 +49,18 @@ const desktopLinkClass = (active) =>
 
 const Navbar = () => {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // The drawer is tied to the page it was opened on, so any navigation closes it
+  const [openPath, setOpenPath] = useState(null);
   const [openSub, setOpenSub] = useState(null);
+  const closeBtnRef = useRef(null);
+  const open = openPath === pathname;
+
+  const openMenu = () => {
+    setOpenSub(null);
+    setOpenPath(pathname);
+  };
+  const closeMenu = () => setOpenPath(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -59,167 +69,214 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock page scroll, focus the close button and allow Esc while the drawer is open
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    closeBtnRef.current?.focus();
+    const onKey = (e) => e.key === "Escape" && setOpenPath(null);
+    window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
     };
   }, [open]);
 
-  const closeMenu = () => {
-    setOpen(false);
-    setOpenSub(null);
-  };
-
   return (
-    <header
-      style={{ viewTransitionName: "site-header" }}
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-slate-900/80 py-3 shadow-lg backdrop-blur-md" : "py-5"
-      }`}
-    >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Logo />
-
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-8 lg:flex">
-          {navLinks.map((link) => {
-            const active = isLinkActive(pathname, link);
-            return (
-              <li key={link.label} className="group relative">
-                {link.children ? (
-                  <button type="button" aria-haspopup="true" className={desktopLinkClass(active)}>
-                    {link.label}
-                    <Chevron className="group-hover:rotate-180 group-focus-within:rotate-180" />
-                  </button>
-                ) : (
-                  <Link href={link.href} aria-current={active ? "page" : undefined} className={desktopLinkClass(active)}>
-                    {link.label}
-                  </Link>
-                )}
-                {link.children && (
-                  <ul className="invisible absolute left-1/2 top-full w-48 -translate-x-1/2 translate-y-2 rounded-xl bg-white p-2 opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                    {link.children.map((child) => {
-                      const childActive = isActive(pathname, child.href);
-                      return (
-                        <li key={child.label}>
-                          <Link
-                            href={child.href}
-                            aria-current={childActive ? "page" : undefined}
-                            className={`block rounded-lg px-4 py-2 text-sm transition-colors hover:bg-emerald-50 hover:text-emerald-700 ${
-                              childActive ? "bg-emerald-50 font-semibold text-emerald-700" : "text-slate-700"
-                            }`}
-                          >
-                            {child.label}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* Desktop actions */}
-        <div className="hidden items-center gap-6 lg:flex">
-          <Link
-            href="/contact"
-            className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-emerald-500 hover:text-white hover:shadow-lg hover:shadow-emerald-500/30"
-          >
-            Get In Touch
-          </Link>
-        </div>
-
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="relative z-50 grid h-10 w-10 place-items-center rounded-full text-white lg:hidden"
-        >
-          <span className="relative block h-4 w-6">
-            <span className={`absolute left-0 h-0.5 w-6 bg-current transition-all duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
-            <span className={`absolute left-0 top-1.5 h-0.5 w-6 bg-current transition-opacity duration-300 ${open ? "opacity-0" : ""}`} />
-            <span className={`absolute left-0 h-0.5 w-6 bg-current transition-all duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
-          </span>
-        </button>
-      </nav>
-
-      {/* Mobile menu */}
-      <div
-        data-lenis-prevent
-        className={`fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-lg transition-all duration-300 lg:hidden ${
-          open ? "visible opacity-100" : "invisible opacity-0"
+    <>
+      <header
+        style={{ viewTransitionName: "site-header" }}
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,padding,box-shadow] duration-300 ${
+          scrolled ? "bg-slate-900/80 py-3 shadow-lg backdrop-blur-md" : "py-4 sm:py-5"
         }`}
       >
-        <div className="flex h-full flex-col overflow-y-auto px-6 pb-10 pt-24">
-          <ul className="flex flex-col divide-y divide-white/10">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <Logo preload />
+
+          {/* Desktop links */}
+          <ul className="hidden items-center gap-6 lg:flex xl:gap-8">
             {navLinks.map((link) => {
               const active = isLinkActive(pathname, link);
               return (
-                <li key={link.label}>
+                <li key={link.label} className="group relative">
                   {link.children ? (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => setOpenSub(openSub === link.label ? null : link.label)}
-                        aria-expanded={openSub === link.label}
-                        className={`flex w-full items-center justify-between py-4 text-lg font-medium transition-colors hover:text-emerald-300 ${
-                          active ? "text-emerald-300" : "text-white"
-                        }`}
-                      >
-                        {link.label}
-                        <Chevron className={openSub === link.label ? "rotate-180" : ""} />
-                      </button>
-                      <div className={`grid overflow-hidden transition-all duration-300 ${openSub === link.label ? "grid-rows-[1fr] pb-3" : "grid-rows-[0fr]"}`}>
-                        <ul className="min-h-0">
-                          {link.children.map((child) => (
-                            <li key={child.label}>
-                              <Link
-                                href={child.href}
-                                onClick={closeMenu}
-                                className={`block py-2 pl-4 text-base transition-colors hover:text-emerald-300 ${
-                                  isActive(pathname, child.href) ? "text-emerald-300" : "text-white/70"
-                                }`}
-                              >
-                                {child.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </>
+                    <button type="button" aria-haspopup="true" className={desktopLinkClass(active)}>
+                      {link.label}
+                      <Chevron className="group-hover:rotate-180 group-focus-within:rotate-180" />
+                    </button>
                   ) : (
-                    <Link
-                      href={link.href}
-                      onClick={closeMenu}
-                      aria-current={active ? "page" : undefined}
-                      className={`block py-4 text-lg font-medium transition-colors hover:text-emerald-300 ${
-                        active ? "text-emerald-300" : "text-white"
-                      }`}
-                    >
+                    <Link href={link.href} aria-current={active ? "page" : undefined} className={desktopLinkClass(active)}>
                       {link.label}
                     </Link>
+                  )}
+                  {link.children && (
+                    <ul className="invisible absolute left-1/2 top-full w-48 -translate-x-1/2 translate-y-2 rounded-xl bg-white p-2 opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                      {link.children.map((child) => {
+                        const childActive = isActive(pathname, child.href);
+                        return (
+                          <li key={child.label}>
+                            <Link
+                              href={child.href}
+                              aria-current={childActive ? "page" : undefined}
+                              className={`block rounded-lg px-4 py-2 text-sm transition-colors hover:bg-emerald-50 hover:text-emerald-700 ${
+                                childActive ? "bg-emerald-50 font-semibold text-emerald-700" : "text-slate-700"
+                              }`}
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
                   )}
                 </li>
               );
             })}
           </ul>
-          <div className="mt-8 flex flex-col gap-3">
+
+          {/* Desktop actions */}
+          <div className="hidden items-center gap-6 lg:flex">
             <Link
               href="/contact"
-              onClick={closeMenu}
-              className="rounded-full bg-white py-3 text-center font-semibold text-slate-900 transition-colors hover:bg-emerald-500 hover:text-white"
+              className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-emerald-500 hover:text-white hover:shadow-lg hover:shadow-emerald-500/30"
             >
               Get In Touch
             </Link>
           </div>
-        </div>
+
+          {/* Mobile toggle */}
+          <button
+            type="button"
+            aria-label="Open menu"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={openMenu}
+            className="grid h-11 w-11 place-items-center rounded-full text-white transition-colors hover:bg-white/10 lg:hidden"
+          >
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M10 17h10" />
+            </svg>
+          </button>
+        </nav>
+      </header>
+
+      {/*
+        Mobile drawer lives OUTSIDE the header: the header's backdrop-blur creates a new
+        containing block, which would trap a `fixed` child inside the header's small box.
+      */}
+      <div className={`lg:hidden ${open ? "" : "pointer-events-none"}`}>
+        {/* Backdrop */}
+        <div
+          aria-hidden="true"
+          onClick={closeMenu}
+          className={`fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`}
+        />
+
+        {/* Panel */}
+        <aside
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Main menu"
+          aria-hidden={!open}
+          inert={!open}
+          data-lenis-prevent
+          className={`fixed inset-y-0 right-0 z-[70] flex w-[86%] max-w-sm flex-col bg-stone-950 shadow-2xl transition-transform duration-300 ease-out ${
+            open ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+            <Logo onClick={closeMenu} />
+            <button
+              ref={closeBtnRef}
+              type="button"
+              onClick={closeMenu}
+              aria-label="Close menu"
+              className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-emerald-500"
+            >
+              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                <path d="M6 6l12 12M18 6 6 18" />
+              </svg>
+            </button>
+          </div>
+
+          <nav className="flex-1 overflow-y-auto overscroll-contain px-5 py-4">
+            <ul className="flex flex-col divide-y divide-white/10">
+              {navLinks.map((link) => {
+                const active = isLinkActive(pathname, link);
+                return (
+                  <li key={link.label}>
+                    {link.children ? (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => setOpenSub(openSub === link.label ? null : link.label)}
+                          aria-expanded={openSub === link.label}
+                          className={`flex w-full items-center justify-between py-4 text-base font-medium transition-colors hover:text-emerald-300 ${
+                            active ? "text-emerald-300" : "text-white"
+                          }`}
+                        >
+                          {link.label}
+                          <Chevron className={openSub === link.label ? "rotate-180" : ""} />
+                        </button>
+                        <div className={`grid transition-[grid-template-rows] duration-300 ${openSub === link.label ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+                          <ul className="min-h-0 overflow-hidden">
+                            {link.children.map((child) => {
+                              const childActive = isActive(pathname, child.href);
+                              return (
+                                <li key={child.label}>
+                                  <Link
+                                    href={child.href}
+                                    onClick={closeMenu}
+                                    aria-current={childActive ? "page" : undefined}
+                                    className={`mb-1 flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm transition-colors hover:bg-white/5 hover:text-emerald-300 ${
+                                      childActive ? "bg-white/5 text-emerald-300" : "text-white/70"
+                                    }`}
+                                  >
+                                    <span className={`h-1.5 w-1.5 rounded-full ${childActive ? "bg-emerald-400" : "bg-white/30"}`} />
+                                    {child.label}
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      </>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        onClick={closeMenu}
+                        aria-current={active ? "page" : undefined}
+                        className={`flex items-center justify-between py-4 text-base font-medium transition-colors hover:text-emerald-300 ${
+                          active ? "text-emerald-300" : "text-white"
+                        }`}
+                      >
+                        {link.label}
+                        {active && <span className="h-2 w-2 rounded-full bg-emerald-400" />}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          <div className="space-y-4 border-t border-white/10 px-5 py-5">
+            <Link
+              href="/contact"
+              onClick={closeMenu}
+              className="block rounded-full bg-emerald-500 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-emerald-400"
+            >
+              Get In Touch
+            </Link>
+            <div className="flex flex-col gap-1 text-sm text-white/60">
+              <a href="tel:+13105550100" className="transition-colors hover:text-emerald-300">+1 (310) 555-0100</a>
+              <a href="mailto:hello@skyline.estate" className="transition-colors hover:text-emerald-300">hello@skyline.estate</a>
+            </div>
+          </div>
+        </aside>
       </div>
-    </header>
+    </>
   );
 };
 

@@ -20,7 +20,7 @@ const Hero = () => {
       <div className="mx-auto w-full max-w-7xl px-4 pb-24 pt-32 text-center sm:px-6 sm:pt-36 lg:px-8 lg:pt-40">
     
 
-        <h1 data-animate="hero" className="mx-auto max-w-4xl text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+        <h1 data-animate="hero" className="mx-auto max-w-4xl text-[2.1rem] font-semibold leading-[1.1] min-[400px]:text-4xl tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
           Trusted Guide Finding Your Dream Home
         </h1>
 

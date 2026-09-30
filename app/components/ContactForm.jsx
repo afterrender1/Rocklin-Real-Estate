@@ -3,7 +3,8 @@
 import { useState } from "react";
 
 const inputClass =
-  "w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10";
+  // 16px text on phones stops iOS from zooming into inputs on focus
+  "w-full min-w-0 rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-base text-stone-900 sm:text-sm outline-none transition placeholder:text-stone-400 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10";
 
 const interests = ["Buying", "Selling", "Renting", "Investing"];
 
