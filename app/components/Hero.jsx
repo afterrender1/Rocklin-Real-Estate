@@ -10,6 +10,7 @@ const Hero = () => {
         fill
         preload
         sizes="100vw"
+        data-animate="hero-bg"
         className="-z-20 object-cover object-[60%_center]"
       />
       {/* Overlays for text readability */}
@@ -19,16 +20,16 @@ const Hero = () => {
       <div className="mx-auto w-full max-w-7xl px-4 pb-24 pt-32 text-center sm:px-6 sm:pt-36 lg:px-8 lg:pt-40">
     
 
-        <h1 className="mx-auto max-w-4xl text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+        <h1 data-animate="hero" className="mx-auto max-w-4xl text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
           Trusted Guide Finding Your Dream Home
         </h1>
 
-        <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg">
+        <p data-animate="hero" className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg">
           Finding the perfect home is more than just a transaction — it&apos;s a
           journey filled with possibilities and dreams.
         </p>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-4">
+        <div data-animate="hero" className="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-4">
           <Link
             href="/properties"
             className="w-full rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-slate-900 shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl sm:w-auto"

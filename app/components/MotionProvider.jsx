@@ -1,0 +1,104 @@
+"use client";
+
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Lenis from "lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import "lenis/dist/lenis.css";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Skip smooth scrolling on touch screens and low-power devices; native scroll is cheaper there
+const shouldSmoothScroll = () => {
+  const lowEnd = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
+  const touch = window.matchMedia("(pointer: coarse)").matches;
+  return !lowEnd && !touch && !prefersReducedMotion();
+};
+
+// Starting offsets per data-animate variant (only transform + opacity, GPU friendly)
+const variants = {
+  "fade-up": { y: 28 },
+  fade: {},
+  scale: { scale: 0.96 },
+  left: { x: -28 },
+  right: { x: 28 },
+};
+
+const reveal = (targets, extra = {}) =>
+  gsap.to(targets, {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    scale: 1,
+    duration: 0.7,
+    ease: "power2.out",
+    stagger: 0.08,
+    overwrite: true,
+    ...extra,
+    // Hand transforms back to CSS so Tailwind hover effects keep working
+    onComplete: () => gsap.set(targets, { clearProps: "transform,transition" }),
+  });
+
+const MotionProvider = ({ children }) => {
+  const pathname = usePathname();
+
+  // Lenis smooth scroll, driven by GSAP's ticker so ScrollTrigger stays in sync
+  useEffect(() => {
+    if (!shouldSmoothScroll()) return;
+
+    const lenis = new Lenis({ lerp: 0.1, anchors: { offset: -80 }, autoRaf: false });
+    const raf = (time) => lenis.raf(time * 1000);
+
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(raf);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove(raf);
+      lenis.destroy();
+    };
+  }, []);
+
+  // Re-run reveal animations whenever the route changes
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+
+      // Above-the-fold intro: plays once on load
+      const intro = gsap.utils.toArray('[data-animate="hero"]');
+      if (intro.length) {
+        gsap.set(intro, { y: 30, transition: "none" });
+        reveal(intro, { duration: 0.9, stagger: 0.12, delay: 0.1, ease: "power3.out" });
+      }
+
+      const heroBg = document.querySelector('[data-animate="hero-bg"]');
+      if (heroBg) {
+        gsap.fromTo(heroBg, { scale: 1.08 }, { scale: 1, duration: 1.6, ease: "power2.out", clearProps: "transform" });
+      }
+
+      // Scroll reveals: batched so many elements share a few tweens
+      const items = gsap.utils
+        .toArray("[data-animate]")
+        .filter((el) => !["hero", "hero-bg"].includes(el.dataset.animate));
+
+      items.forEach((el) => {
+        gsap.set(el, { ...(variants[el.dataset.animate] || variants["fade-up"]), transition: "none" });
+      });
+
+      ScrollTrigger.batch(items, {
+        start: "top 88%",
+        once: true,
+        onEnter: (batch) => reveal(batch),
+      });
+    },
+    { dependencies: [pathname], revertOnUpdate: true }
+  );
+
+  return children;
+};
+
+export default MotionProvider;

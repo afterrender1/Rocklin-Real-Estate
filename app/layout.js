@@ -1,4 +1,5 @@
 import { Manrope } from "next/font/google";
+import MotionProvider from "./components/MotionProvider";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -15,7 +16,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${manrope.variable} h-full antialiased`}>
-      <body suppressHydrationWarning className="min-h-full flex flex-col font-sans">{children}</body>
+      <head>
+        {/* Without JS, never leave animated content hidden */}
+        <noscript>
+          <style>{`[data-animate]{opacity:1!important}`}</style>
+        </noscript>
+      </head>
+      <body suppressHydrationWarning className="min-h-full flex flex-col font-sans">
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   );
 }

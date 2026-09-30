@@ -7,3 +7,15 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Lenis handles smoothing itself; native smooth scroll would fight it */
+html.lenis {
+  scroll-behavior: auto;
+}
+
+/* Hidden until GSAP reveals them; skipped entirely for reduced-motion users */
+@media (prefers-reduced-motion: no-preference) {
+  [data-animate]:not([data-animate="hero-bg"]) {
+    opacity: 0;
+  }
+}

@@ -16,7 +16,7 @@ const PropertyCard = ({ property, className = "" }) => {
   const { slug, name, location, code, price, beds, baths, area, image, tint, button, status } = property;
 
   return (
-    <article className={`group relative h-[440px] overflow-hidden rounded-3xl shadow-lg shadow-slate-900/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:h-[480px] ${className}`}>
+    <article data-animate="fade-up" className={`group relative h-[440px] overflow-hidden rounded-3xl shadow-lg shadow-slate-900/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:h-[480px] ${className}`}>
       <Image
         src={image}
         alt={`${name} in ${location}`}

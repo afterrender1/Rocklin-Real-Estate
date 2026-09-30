@@ -43,7 +43,7 @@ const icons = {
 };
 
 const Section = ({ title, children, id }) => (
-  <section id={id} className="scroll-mt-28 rounded-3xl border border-stone-200 bg-white p-6 sm:p-8">
+  <section id={id} data-animate="fade-up" className="scroll-mt-28 rounded-3xl border border-stone-200 bg-white p-6 sm:p-8">
     <h2 className="flex items-center gap-3 text-xl font-semibold text-stone-900 sm:text-2xl">
       <span className="h-6 w-1 rounded-full bg-emerald-500" />
       {title}
@@ -96,7 +96,7 @@ export default async function PropertyPage({ params }) {
         {/* Header + gallery */}
         <section className="bg-linear-to-b from-stone-950 from-65% to-stone-50 to-65% pt-28 sm:pt-32">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-white/60">
+            <nav data-animate="hero" aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-white/60">
               <Link href="/" className="transition-colors hover:text-emerald-300">Home</Link>
               <span>/</span>
               <Link href="/properties" className="transition-colors hover:text-emerald-300">Properties</Link>
@@ -104,7 +104,7 @@ export default async function PropertyPage({ params }) {
               <span className="text-white">{name}</span>
             </nav>
 
-            <div className="mt-6 flex flex-col gap-6 pb-8 md:flex-row md:items-end md:justify-between">
+            <div data-animate="hero" className="mt-6 flex flex-col gap-6 pb-8 md:flex-row md:items-end md:justify-between">
               <div>
                 <div className="flex flex-wrap gap-2">
                   <span className="rounded-full bg-emerald-500 px-3 py-1 text-xs font-semibold text-white">{status}</span>
@@ -123,7 +123,9 @@ export default async function PropertyPage({ params }) {
               </div>
             </div>
 
-            <PropertyGallery images={gallery} name={name} />
+            <div data-animate="hero">
+              <PropertyGallery images={gallery} name={name} />
+            </div>
           </div>
         </section>
 
@@ -131,7 +133,7 @@ export default async function PropertyPage({ params }) {
         <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
           <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {facts.map((f) => (
-              <li key={f.label} className="flex items-center gap-3 rounded-2xl border border-stone-200 bg-white p-4 transition hover:border-emerald-400">
+              <li key={f.label} data-animate="fade-up" className="flex items-center gap-3 rounded-2xl border border-stone-200 bg-white p-4 transition hover:border-emerald-400">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700">{f.icon}</span>
                 <span className="min-w-0">
                   <span className="block truncate text-base font-semibold text-stone-900">{f.value}</span>
@@ -205,7 +207,7 @@ export default async function PropertyPage({ params }) {
           </div>
 
           {/* Sidebar */}
-          <aside className="lg:sticky lg:top-24 lg:self-start">
+          <aside data-animate="right" className="lg:sticky lg:top-24 lg:self-start">
             <AgentContact agent={agent} propertyName={name} />
           </aside>
         </div>
@@ -213,7 +215,7 @@ export default async function PropertyPage({ params }) {
         {/* Similar properties */}
         <section className="border-t border-stone-200 bg-white py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div data-animate="fade-up" className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <h2 className="text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
                 Similar{" "}
                 <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">Properties</span>

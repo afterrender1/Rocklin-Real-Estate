@@ -20,7 +20,7 @@ const LuxuryHomes = () => {
     <section id="properties" className="overflow-hidden bg-stone-50 py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-xl">
+          <div data-animate="fade-up" className="max-w-xl">
             <span className="inline-block rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm tracking-wide text-emerald-700">
               Featured Listings
             </span>
@@ -35,7 +35,7 @@ const LuxuryHomes = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div data-animate="fade" className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => scroll(-1)}
@@ -66,7 +66,7 @@ const LuxuryHomes = () => {
         ))}
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+      <div data-animate="fade-up" className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
         <Link
           href="/properties"
           className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-emerald-600 hover:shadow-lg hover:shadow-emerald-600/30"

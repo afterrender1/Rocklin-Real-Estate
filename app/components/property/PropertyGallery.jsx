@@ -69,6 +69,7 @@ const PropertyGallery = ({ images, name }) => {
       {active !== null && (
         <div
           role="dialog"
+          data-lenis-prevent
           aria-modal="true"
           aria-label={`${name} photos`}
           className="fixed inset-0 z-[60] flex flex-col bg-black/95"

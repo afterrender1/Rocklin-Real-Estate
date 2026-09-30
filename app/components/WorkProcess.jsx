@@ -94,7 +94,7 @@ const WorkProcess = () => {
   return (
     <section id="next" className="bg-white py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <div data-animate="fade-up" className="mx-auto max-w-2xl text-center">
           <span className="inline-block rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm tracking-wide text-emerald-700">
             How It Works
           </span>
@@ -118,6 +118,7 @@ const WorkProcess = () => {
           {steps.map(({ label, title, tag, Visual }, i) => (
             <li
               key={label}
+              data-animate="fade-up"
               className="group relative flex min-h-[340px] flex-col rounded-3xl border border-stone-200/70 bg-stone-100 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400 hover:bg-emerald-50/40 hover:shadow-xl hover:shadow-emerald-900/5 hover:ring-4 hover:ring-emerald-500/10 sm:p-6"
             >
               <p className="text-sm uppercase tracking-wider text-stone-400 transition-colors group-hover:text-emerald-600">{label}</p>

@@ -70,7 +70,7 @@ const Navbar = () => {
         scrolled ? "bg-slate-900/80 py-3 shadow-lg backdrop-blur-md" : "py-5"
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <nav data-animate="hero" className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
 
         {/* Desktop links */}
@@ -138,6 +138,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       <div
+        data-lenis-prevent
         className={`fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-lg transition-all duration-300 lg:hidden ${
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
