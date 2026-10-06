@@ -14,13 +14,13 @@ export default function PropertiesPage() {
         <section className="bg-stone-950 pb-16 pt-32 sm:pb-20 sm:pt-36">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <nav data-animate="hero" aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-white/60">
-              <Link href="/" className="transition-colors hover:text-emerald-300">Home</Link>
+              <Link href="/" className="transition-colors hover:text-orange-300">Home</Link>
               <span>/</span>
               <span className="text-white">Properties</span>
             </nav>
             <h1 data-animate="hero" className="mt-5 text-[2rem] font-semibold leading-[1.1] tracking-tight text-white min-[400px]:text-4xl sm:text-5xl">
               All{" "}
-              <span className="bg-gradient-to-r from-emerald-400 to-emerald-200 bg-clip-text text-transparent">Properties</span>
+              <span className="bg-gradient-to-r from-orange-400 to-orange-200 bg-clip-text text-transparent">Properties</span>
             </h1>
             <p data-animate="hero" className="mt-4 max-w-xl text-white/70 sm:text-lg">
               {properties.length} handpicked luxury homes in the world&apos;s most desirable locations.

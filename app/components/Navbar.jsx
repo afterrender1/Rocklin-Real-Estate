@@ -24,17 +24,15 @@ const isLinkActive = (pathname, link) =>
   link.children ? link.children.some((c) => isActive(pathname, c.href)) : isActive(pathname, link.href);
 
 const Logo = ({ onClick }) => (
-  <Link href="/" onClick={onClick} aria-label="Rocklin Real Estate home" className="group flex shrink-0 items-center gap-2.5">
-    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-md transition group-hover:scale-105 sm:h-10 sm:w-10">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 sm:h-6 sm:w-6">
-        <path d="M3 21h18M3 10l9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10z" />
-        <path d="M9 21V12h6v9" />
-      </svg>
-    </div>
-    <div className="flex flex-col text-left">
-      <span className="text-base font-bold tracking-wider text-white sm:text-lg leading-tight">ROCKLIN</span>
-      <span className="text-[9px] font-semibold tracking-widest text-emerald-400 uppercase leading-none">REAL ESTATE</span>
-    </div>
+  <Link href="/" onClick={onClick} aria-label="Rocklin Real Estate home" className="flex shrink-0 items-center">
+    <Image
+      src="/logo/rocklin-logo-light.webp"
+      alt="Rocklin Real Estate"
+      width={1981}
+      height={794}
+      priority
+      className="h-10 w-auto sm:h-12"
+    />
   </Link>
 );
 
@@ -45,8 +43,8 @@ const Chevron = ({ className = "" }) => (
 );
 
 const desktopLinkClass = (active) =>
-  `relative flex items-center gap-1 py-2 text-sm font-medium transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:rounded-full after:bg-emerald-400 after:transition-transform after:duration-300 hover:text-emerald-300 hover:after:scale-x-100 ${
-    active ? "text-emerald-300 after:scale-x-100" : "text-white/90 after:scale-x-0"
+  `relative flex items-center gap-1 py-2 text-sm font-medium transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:rounded-full after:bg-orange-400 after:transition-transform after:duration-300 hover:text-orange-300 hover:after:scale-x-100 ${
+    active ? "text-orange-300 after:scale-x-100" : "text-white/90 after:scale-x-0"
   }`;
 
 const Navbar = () => {
@@ -120,8 +118,8 @@ const Navbar = () => {
                             <Link
                               href={child.href}
                               aria-current={childActive ? "page" : undefined}
-                              className={`block rounded-lg px-4 py-2 text-sm transition-colors hover:bg-emerald-50 hover:text-emerald-700 ${
-                                childActive ? "bg-emerald-50 font-semibold text-emerald-700" : "text-slate-700"
+                              className={`block rounded-lg px-4 py-2 text-sm transition-colors hover:bg-orange-50 hover:text-orange-700 ${
+                                childActive ? "bg-orange-50 font-semibold text-orange-700" : "text-slate-700"
                               }`}
                             >
                               {child.label}
@@ -140,7 +138,7 @@ const Navbar = () => {
           <div className="hidden items-center gap-6 lg:flex">
             <Link
               href="/contact"
-              className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-emerald-500 hover:text-white hover:shadow-lg hover:shadow-emerald-500/30"
+              className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-orange-500 hover:text-white hover:shadow-lg hover:shadow-orange-500/30"
             >
               Get In Touch
             </Link>
@@ -194,7 +192,7 @@ const Navbar = () => {
               type="button"
               onClick={closeMenu}
               aria-label="Close menu"
-              className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-emerald-500"
+              className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-orange-500"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
                 <path d="M6 6l12 12M18 6 6 18" />
@@ -214,8 +212,8 @@ const Navbar = () => {
                           type="button"
                           onClick={() => setOpenSub(openSub === link.label ? null : link.label)}
                           aria-expanded={openSub === link.label}
-                          className={`flex w-full items-center justify-between py-4 text-base font-medium transition-colors hover:text-emerald-300 ${
-                            active ? "text-emerald-300" : "text-white"
+                          className={`flex w-full items-center justify-between py-4 text-base font-medium transition-colors hover:text-orange-300 ${
+                            active ? "text-orange-300" : "text-white"
                           }`}
                         >
                           {link.label}
@@ -231,11 +229,11 @@ const Navbar = () => {
                                     href={child.href}
                                     onClick={closeMenu}
                                     aria-current={childActive ? "page" : undefined}
-                                    className={`mb-1 flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm transition-colors hover:bg-white/5 hover:text-emerald-300 ${
-                                      childActive ? "bg-white/5 text-emerald-300" : "text-white/70"
+                                    className={`mb-1 flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm transition-colors hover:bg-white/5 hover:text-orange-300 ${
+                                      childActive ? "bg-white/5 text-orange-300" : "text-white/70"
                                     }`}
                                   >
-                                    <span className={`h-1.5 w-1.5 rounded-full ${childActive ? "bg-emerald-400" : "bg-white/30"}`} />
+                                    <span className={`h-1.5 w-1.5 rounded-full ${childActive ? "bg-orange-400" : "bg-white/30"}`} />
                                     {child.label}
                                   </Link>
                                 </li>
@@ -249,12 +247,12 @@ const Navbar = () => {
                         href={link.href}
                         onClick={closeMenu}
                         aria-current={active ? "page" : undefined}
-                        className={`flex items-center justify-between py-4 text-base font-medium transition-colors hover:text-emerald-300 ${
-                          active ? "text-emerald-300" : "text-white"
+                        className={`flex items-center justify-between py-4 text-base font-medium transition-colors hover:text-orange-300 ${
+                          active ? "text-orange-300" : "text-white"
                         }`}
                       >
                         {link.label}
-                        {active && <span className="h-2 w-2 rounded-full bg-emerald-400" />}
+                        {active && <span className="h-2 w-2 rounded-full bg-orange-400" />}
                       </Link>
                     )}
                   </li>
@@ -267,13 +265,13 @@ const Navbar = () => {
             <Link
               href="/contact"
               onClick={closeMenu}
-              className="block rounded-full bg-emerald-500 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-emerald-400"
+              className="block rounded-full bg-orange-500 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-orange-400"
             >
               Get In Touch
             </Link>
             <div className="flex flex-col gap-1 text-sm text-white/60">
-              <a href="tel:+13076677665" className="transition-colors hover:text-emerald-300">+1 (307) 667-7665</a>
-              <a href="mailto:arham@afterrender.com" className="transition-colors hover:text-emerald-300">arham@afterrender.com</a>
+              <a href="tel:+13076677665" className="transition-colors hover:text-orange-300">+1 (307) 667-7665</a>
+              <a href="mailto:arham@afterrender.com" className="transition-colors hover:text-orange-300">arham@afterrender.com</a>
             </div>
           </div>
         </aside>

@@ -44,7 +44,7 @@ const icons = {
 const Section = ({ title, children, id }) => (
   <section id={id} data-animate="fade-up" className="scroll-mt-28 rounded-3xl border border-stone-200 bg-white p-5 sm:p-8">
     <h2 className="flex items-center gap-3 text-xl font-semibold text-stone-900 sm:text-2xl">
-      <span className="h-6 w-1 rounded-full bg-emerald-500" />
+      <span className="h-6 w-1 rounded-full bg-orange-500" />
       {title}
     </h2>
     <div className="mt-6">{children}</div>
@@ -95,9 +95,9 @@ export default async function PropertyPage({ params }) {
         <section className="bg-linear-to-b from-stone-950 from-65% to-stone-50 to-65% pt-28 sm:pt-32">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <nav data-animate="hero" aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-white/60">
-              <Link href="/" className="transition-colors hover:text-emerald-300">Home</Link>
+              <Link href="/" className="transition-colors hover:text-orange-300">Home</Link>
               <span>/</span>
-              <Link href="/properties" className="transition-colors hover:text-emerald-300">Properties</Link>
+              <Link href="/properties" className="transition-colors hover:text-orange-300">Properties</Link>
               <span>/</span>
               <span className="text-white">{name}</span>
             </nav>
@@ -105,19 +105,19 @@ export default async function PropertyPage({ params }) {
             <div data-animate="hero" className="mt-6 flex flex-col gap-6 pb-8 md:flex-row md:items-end md:justify-between">
               <div>
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full bg-emerald-500 px-3 py-1 text-xs font-semibold text-white">{status}</span>
+                  <span className="rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-white">{status}</span>
                   <span className="rounded-full border border-white/20 px-3 py-1 text-xs font-medium text-white/80">{type}</span>
                 </div>
                 <h1 className="mt-4 text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-white sm:text-4xl lg:text-5xl">{name}</h1>
                 <p className="mt-3 flex items-start gap-2 text-sm text-white/70 sm:text-base">
-                  <span className="mt-0.5 text-emerald-400">{icons.pin}</span>
+                  <span className="mt-0.5 text-orange-400">{icons.pin}</span>
                   {address}
                 </p>
               </div>
               <div className="md:text-right">
                 <p className="text-sm text-white/60">Asking price</p>
                 <p className="text-3xl font-bold text-white sm:text-4xl">{formatPrice(price)}</p>
-                <p className="mt-1 text-sm text-emerald-300">{formatPrice(price / area)} / sqft</p>
+                <p className="mt-1 text-sm text-orange-300">{formatPrice(price / area)} / sqft</p>
               </div>
             </div>
 
@@ -131,8 +131,8 @@ export default async function PropertyPage({ params }) {
         <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
           <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {facts.map((f) => (
-              <li key={f.label} data-animate="fade-up" className="flex items-center gap-2.5 rounded-2xl border border-stone-200 bg-white p-3 transition hover:border-emerald-400 sm:gap-3 sm:p-4">
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700 sm:h-10 sm:w-10">{f.icon}</span>
+              <li key={f.label} data-animate="fade-up" className="flex items-center gap-2.5 rounded-2xl border border-stone-200 bg-white p-3 transition hover:border-orange-400 sm:gap-3 sm:p-4">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-orange-50 text-orange-700 sm:h-10 sm:w-10">{f.icon}</span>
                 <span className="min-w-0">
                   <span className="block truncate text-sm font-semibold text-stone-900 sm:text-base">{f.value}</span>
                   <span className="block text-xs text-stone-500">{f.label}</span>
@@ -169,7 +169,7 @@ export default async function PropertyPage({ params }) {
               <ul className="grid gap-3 sm:grid-cols-2">
                 {features.map((f) => (
                   <li key={f} className="flex items-center gap-3 rounded-xl bg-stone-50 px-4 py-3 text-sm font-medium text-stone-700">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">{icons.check}</span>
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-orange-500 text-white">{icons.check}</span>
                     {f}
                   </li>
                 ))}
@@ -194,7 +194,7 @@ export default async function PropertyPage({ params }) {
                 {nearby.map((n) => (
                   <li key={n.name} className="flex items-center justify-between gap-4 rounded-xl border border-stone-200 px-4 py-3 text-sm">
                     <span className="flex items-center gap-2 font-medium text-stone-800">
-                      <span className="text-emerald-600">{icons.pin}</span>
+                      <span className="text-orange-600">{icons.pin}</span>
                       {n.name}
                     </span>
                     <span className="shrink-0 text-stone-500">{n.distance}</span>
@@ -216,9 +216,9 @@ export default async function PropertyPage({ params }) {
             <div data-animate="fade-up" className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <h2 className="text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-stone-900 sm:text-4xl">
                 Similar{" "}
-                <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">Properties</span>
+                <span className="bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent">Properties</span>
               </h2>
-              <Link href="/properties" className="inline-flex items-center gap-2 text-sm font-semibold text-stone-900 transition-colors hover:text-emerald-600">
+              <Link href="/properties" className="inline-flex items-center gap-2 text-sm font-semibold text-stone-900 transition-colors hover:text-orange-600">
                 View all <ArrowIcon />
               </Link>
             </div>

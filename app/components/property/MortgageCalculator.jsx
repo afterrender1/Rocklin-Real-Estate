@@ -16,7 +16,7 @@ const Slider = ({ label, value, display, min, max, step, onChange }) => (
       step={step}
       value={value}
       onChange={(e) => onChange(Number(e.target.value))}
-      className="mt-3 w-full cursor-pointer accent-emerald-600"
+      className="mt-3 w-full cursor-pointer accent-orange-600"
     />
   </label>
 );
@@ -36,8 +36,8 @@ const MortgageCalculator = ({ price }) => {
   const total = monthly + tax + insurance;
 
   const parts = [
-    { label: "Principal & interest", value: monthly, color: "bg-emerald-600" },
-    { label: "Property tax", value: tax, color: "bg-emerald-300" },
+    { label: "Principal & interest", value: monthly, color: "bg-orange-600" },
+    { label: "Property tax", value: tax, color: "bg-orange-300" },
     { label: "Home insurance", value: insurance, color: "bg-stone-300" },
   ];
 

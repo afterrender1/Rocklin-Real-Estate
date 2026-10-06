@@ -48,7 +48,7 @@ const PropertyCard = ({ property, className = "" }) => {
 
       {/* Content */}
       <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-        <p className="text-sm font-medium text-emerald-300">{formatPrice(price)}</p>
+        <p className="text-sm font-medium text-orange-300">{formatPrice(price)}</p>
         <h3 className="mt-1 text-2xl font-bold leading-tight text-white sm:text-[26px]">{name}</h3>
         <p className="mt-1 flex items-center gap-1.5 text-sm text-white/80">
           {location}
@@ -60,7 +60,7 @@ const PropertyCard = ({ property, className = "" }) => {
 
         <Link
           href={`/properties/${slug}`}
-          className={`mt-5 flex items-center justify-between rounded-xl px-5 py-3.5 text-sm font-semibold text-white bg-white/15 backdrop-blur-md transition-colors duration-300 hover:bg-emerald-500`}
+          className={`mt-5 flex items-center justify-between rounded-xl px-5 py-3.5 text-sm font-semibold text-white bg-white/15 backdrop-blur-md transition-colors duration-300 hover:bg-orange-500`}
         >
           View Property
           <ArrowIcon className="transition-transform duration-300 group-hover:translate-x-1" />

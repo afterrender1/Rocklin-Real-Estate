@@ -11,7 +11,7 @@ export const metadata = {
 const VerifiedBadge = () => (
   <svg viewBox="0 0 24 24" className="h-6 w-6 shrink-0" aria-label="Verified agent" role="img">
     <path
-      className="fill-emerald-500"
+      className="fill-orange-500"
       d="M12 1.5l2.4 1.8 3-.2.9 2.9 2.5 1.7-.9 2.9.9 2.9-2.5 1.7-.9 2.9-3-.2L12 22.5l-2.4-1.8-3 .2-.9-2.9-2.5-1.7.9-2.9-.9-2.9 2.5-1.7.9-2.9 3 .2L12 1.5Z"
     />
     <path d="m8 12.2 2.7 2.7L16.2 9.4" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -39,7 +39,7 @@ const AgentPhoto = ({ agent }) =>
     />
   ) : (
     // Placeholder until a photo is added in app/data/properties.js
-    <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-stone-200 via-stone-100 to-emerald-100">
+    <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-stone-200 via-stone-100 to-orange-100">
       <span className="text-6xl font-bold tracking-tight text-stone-400/80">{agent.initials}</span>
     </div>
   );
@@ -83,7 +83,7 @@ export default function AgentsPage() {
                   <span className="truncate">{agent.name}</span>
                   <VerifiedBadge />
                 </h2>
-                <p className="mt-1 text-sm font-medium text-emerald-700">{agent.role}</p>
+                <p className="mt-1 text-sm font-medium text-orange-700">{agent.role}</p>
                 <p className="mt-2 text-sm leading-relaxed text-stone-500">{agent.bio}</p>
 
                 {listings.length > 0 && (
@@ -92,7 +92,7 @@ export default function AgentsPage() {
                     {listings.map((p, i) => (
                       <span key={p.slug}>
                         {i > 0 && ", "}
-                        <Link href={`/properties/${p.slug}`} className="font-medium text-stone-700 underline-offset-2 hover:text-emerald-700 hover:underline">
+                        <Link href={`/properties/${p.slug}`} className="font-medium text-stone-700 underline-offset-2 hover:text-orange-700 hover:underline">
                           {p.name}
                         </Link>
                       </span>
@@ -113,7 +113,7 @@ export default function AgentsPage() {
                   </div>
                   <a
                     href={`mailto:${agent.email}`}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-stone-100 px-4 py-2.5 text-sm font-semibold text-stone-900 shadow-inner shadow-white transition-colors hover:bg-emerald-500 hover:text-white"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-stone-100 px-4 py-2.5 text-sm font-semibold text-stone-900 shadow-inner shadow-white transition-colors hover:bg-orange-500 hover:text-white"
                   >
                     Contact
                     <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">

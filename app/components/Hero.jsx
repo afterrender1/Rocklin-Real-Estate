@@ -22,7 +22,7 @@ const Hero = () => {
           data-animate="hero"
           className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur-sm sm:text-sm"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+          <span className="h-1.5 w-1.5 rounded-full bg-orange-400" />
           Local knowledge. Real experience.
         </div>
 

@@ -55,7 +55,7 @@ export default function ContactPage() {
           {contactInfo.map((c) => {
             const content = (
               <>
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 transition-colors group-hover:bg-emerald-500 group-hover:text-white">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-orange-50 text-orange-700 transition-colors group-hover:bg-orange-500 group-hover:text-white">
                   {c.icon}
                 </span>
                 <span>
@@ -64,7 +64,7 @@ export default function ContactPage() {
                 </span>
               </>
             );
-            const cls = "group flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-5 transition-colors hover:border-emerald-400";
+            const cls = "group flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-5 transition-colors hover:border-orange-400";
             return c.href ? (
               <a key={c.label} href={c.href} className={cls}>{content}</a>
             ) : (
@@ -77,7 +77,7 @@ export default function ContactPage() {
             <ul className="mt-4 space-y-3">
               {offices.map((o) => (
                 <li key={o.city} className="flex gap-3 text-sm">
-                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
+                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-orange-500" />
                   <span>
                     <span className="block font-medium text-stone-800">{o.city}</span>
                     <span className="text-stone-500">{o.address}</span>

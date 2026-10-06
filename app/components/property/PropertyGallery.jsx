@@ -94,7 +94,7 @@ const PropertyGallery = ({ images, name }) => {
                 type="button"
                 onClick={() => move(dir)}
                 aria-label={dir < 0 ? "Previous photo" : "Next photo"}
-                className={`absolute top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition hover:bg-emerald-500 ${
+                className={`absolute top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition hover:bg-orange-500 ${
                   dir < 0 ? "left-3 sm:left-6" : "right-3 sm:right-6"
                 }`}
               >
@@ -113,7 +113,7 @@ const PropertyGallery = ({ images, name }) => {
                 onClick={() => setActive(i)}
                 aria-label={`Show photo ${i + 1}`}
                 className={`relative h-14 w-20 shrink-0 overflow-hidden rounded-lg ring-2 transition ${
-                  i === active ? "ring-emerald-400" : "opacity-60 ring-transparent hover:opacity-100"
+                  i === active ? "ring-orange-400" : "opacity-60 ring-transparent hover:opacity-100"
                 }`}
               >
                 <Image src={src} alt="" fill sizes="80px" className="object-cover" />

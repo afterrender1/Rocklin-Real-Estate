@@ -49,18 +49,18 @@ const Faq = ({ hideHeading = false }) => {
       {/* Doodles */}
       <ChatDoodle className="absolute left-[8%] top-40 hidden h-12 w-16 -rotate-6 text-stone-800 lg:block" />
       <QuestionDoodle className="absolute right-[10%] top-12 hidden h-16 w-20 text-stone-800 md:block" />
-      <SparkleDoodle className="absolute bottom-10 right-6 hidden h-8 w-8 text-emerald-600 sm:block" />
+      <SparkleDoodle className="absolute bottom-10 right-6 hidden h-8 w-8 text-orange-600 sm:block" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         {!hideHeading && (
           <div data-animate="fade-up" className="mx-auto max-w-2xl text-center">
-            <span className="inline-block rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm tracking-wide text-emerald-700">
+            <span className="inline-block rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-sm tracking-wide text-orange-700">
               Got Questions?
             </span>
             <h2 className="mt-5 text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-stone-900 sm:text-4xl lg:text-5xl">
               Frequently Asked{" "}
-              <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">Questions</span>
+              <span className="bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent">Questions</span>
             </h2>
             <p className="mt-4 text-base text-stone-500 sm:text-lg">
               Everything you need to know about buying, selling and investing with Rocklin.
@@ -71,7 +71,7 @@ const Faq = ({ hideHeading = false }) => {
         <div className={`grid grid-cols-[minmax(0,1fr)] gap-6 sm:gap-8 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-14 ${hideHeading ? "" : "mt-12 sm:mt-16"}`}>
           {/* Categories */}
           <nav data-animate="left" aria-label="FAQ categories" className="relative min-w-0 lg:sticky lg:top-28 lg:self-start">
-            <p className="mb-4 hidden text-sm font-semibold uppercase tracking-wider text-emerald-700 lg:block">Categories</p>
+            <p className="mb-4 hidden text-sm font-semibold uppercase tracking-wider text-orange-700 lg:block">Categories</p>
             <ul className="-mx-4 flex snap-x gap-2 overflow-x-auto scroll-px-4 px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
               {faqCategories.map((c) => {
                 const active = c.id === activeCat;
@@ -87,8 +87,8 @@ const Faq = ({ hideHeading = false }) => {
                       aria-current={active ? "true" : undefined}
                       className={`w-full whitespace-nowrap rounded-full border px-4 py-2 text-left text-sm transition-colors lg:rounded-none lg:border-0 lg:border-l-2 lg:py-2.5 ${
                         active
-                          ? "border-emerald-500 bg-emerald-50 font-semibold text-emerald-800 lg:bg-transparent lg:text-stone-900"
-                          : "border-stone-200 text-stone-500 hover:text-emerald-700 lg:border-transparent"
+                          ? "border-orange-500 bg-orange-50 font-semibold text-orange-800 lg:bg-transparent lg:text-stone-900"
+                          : "border-stone-200 text-stone-500 hover:text-orange-700 lg:border-transparent"
                       }`}
                     >
                       {c.label}
@@ -111,7 +111,7 @@ const Faq = ({ hideHeading = false }) => {
                   <li
                     key={item.q}
                     className={`rounded-2xl border transition-colors duration-300 ${
-                      open ? "border-emerald-400 bg-white shadow-lg shadow-emerald-900/5 ring-4 ring-emerald-500/10" : "border-transparent bg-stone-100 hover:bg-stone-200/60"
+                      open ? "border-orange-400 bg-white shadow-lg shadow-orange-900/5 ring-4 ring-orange-500/10" : "border-transparent bg-stone-100 hover:bg-stone-200/60"
                     }`}
                   >
                     <h3>
@@ -125,7 +125,7 @@ const Faq = ({ hideHeading = false }) => {
                         <span className={`min-w-0 text-[15px] leading-snug sm:text-lg ${open ? "font-semibold text-stone-900" : "text-stone-700"}`}>{item.q}</span>
                         <span
                           className={`relative grid h-8 w-8 shrink-0 place-items-center rounded-full transition-colors ${
-                            open ? "bg-emerald-500 text-white" : "bg-white text-stone-700"
+                            open ? "bg-orange-500 text-white" : "bg-white text-stone-700"
                           }`}
                         >
                           <span className="absolute h-0.5 w-3 rounded-full bg-current" />
@@ -150,7 +150,7 @@ const Faq = ({ hideHeading = false }) => {
             {/* Still have a question */}
             <div className="mt-8 flex flex-col gap-5 rounded-2xl bg-stone-900 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
               <div className="flex items-start gap-4">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-orange-500 text-white">
                   <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="9" />
                     <path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6" />
@@ -164,7 +164,7 @@ const Faq = ({ hideHeading = false }) => {
               </div>
               <Link
                 href="/contact"
-                className="inline-flex w-full shrink-0 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-stone-900 transition sm:w-auto hover:bg-emerald-500 hover:text-white"
+                className="inline-flex w-full shrink-0 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-stone-900 transition sm:w-auto hover:bg-orange-500 hover:text-white"
               >
                 Contact Us
               </Link>

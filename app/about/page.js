@@ -68,12 +68,12 @@ export default function AboutPage() {
             />
           </div>
           <div data-animate="fade-up">
-            <span className="inline-block rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm tracking-wide text-emerald-700">
+            <span className="inline-block rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-sm tracking-wide text-orange-700">
               Our Story
             </span>
             <h2 className="mt-5 text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-stone-900 sm:text-4xl">
               From a small office to a{" "}
-              <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">global network</span>
+              <span className="bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent">global network</span>
             </h2>
             <div className="mt-5 space-y-4 leading-relaxed text-stone-600">
               <p>
@@ -87,7 +87,7 @@ export default function AboutPage() {
             </div>
             <dl className="mt-8 grid grid-cols-2 gap-4">
               {stats.map((s) => (
-                <div key={s.label} className="rounded-2xl border border-stone-200 p-5 transition-colors hover:border-emerald-400">
+                <div key={s.label} className="rounded-2xl border border-stone-200 p-5 transition-colors hover:border-orange-400">
                   <dt className="text-sm text-stone-500">{s.label}</dt>
                   <dd className="mt-1 text-3xl font-bold text-stone-900">{s.value}</dd>
                 </div>
@@ -103,7 +103,7 @@ export default function AboutPage() {
           <div data-animate="fade-up" className="mx-auto max-w-2xl text-center">
             <h2 className="text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-stone-900 sm:text-4xl">
               What We{" "}
-              <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">Stand For</span>
+              <span className="bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent">Stand For</span>
             </h2>
             <p className="mt-4 text-stone-500 sm:text-lg">The principles that guide every conversation, viewing and deal.</p>
           </div>
@@ -112,9 +112,9 @@ export default function AboutPage() {
               <li
                 key={v.title}
                 data-animate="fade-up"
-                className="group rounded-3xl border border-stone-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400 hover:shadow-xl hover:shadow-emerald-900/5"
+                className="group rounded-3xl border border-stone-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-orange-400 hover:shadow-xl hover:shadow-orange-900/5"
               >
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 transition-colors group-hover:bg-emerald-500 group-hover:text-white">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-orange-50 text-orange-700 transition-colors group-hover:bg-orange-500 group-hover:text-white">
                   {v.icon}
                 </span>
                 <h3 className="mt-5 text-lg font-semibold text-stone-900">{v.title}</h3>
@@ -140,13 +140,13 @@ export default function AboutPage() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/properties"
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-400"
+              className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-400"
             >
               Explore Properties <ArrowIcon />
             </Link>
             <Link
               href="/contact"
-              className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-emerald-400 hover:text-emerald-300"
+              className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-orange-400 hover:text-orange-300"
             >
               Contact Us
             </Link>

@@ -82,17 +82,14 @@ const Footer = () => (
     <div className="mx-auto mt-3 max-w-[96rem] rounded-3xl border border-stone-200 bg-stone-50 sm:mt-4">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="flex flex-col gap-4 border-b border-stone-200 py-10 sm:flex-row sm:items-center sm:justify-between">
-          <Link href="/" aria-label="Rocklin Real Estate home" className="group inline-flex items-center gap-2.5">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 text-white shadow-md transition group-hover:scale-105 sm:h-11 sm:w-11">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-                <path d="M3 21h18M3 10l9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10z" />
-                <path d="M9 21V12h6v9" />
-              </svg>
-            </div>
-            <div className="flex flex-col text-left">
-              <span className="text-xl font-bold tracking-wider text-stone-900 sm:text-2xl leading-tight">ROCKLIN</span>
-              <span className="text-[10px] font-semibold tracking-widest text-emerald-600 uppercase leading-none">REAL ESTATE</span>
-            </div>
+          <Link href="/" aria-label="Rocklin Real Estate home" className="inline-flex">
+            <Image
+              src="/logo/rocklin-logo-dark.webp"
+              alt="Rocklin Real Estate"
+              width={1981}
+              height={794}
+              className="h-11 w-auto sm:h-12"
+            />
           </Link>
           <p className="text-sm text-stone-600">Local knowledge. Real experience. Real Estate Done Right.</p>
         </div>
@@ -104,7 +101,7 @@ const Footer = () => (
               <ul className="mt-4 space-y-3">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <Link href={l.href} className="text-sm text-stone-500 transition-colors hover:text-emerald-600">
+                    <Link href={l.href} className="text-sm text-stone-500 transition-colors hover:text-orange-600">
                       {l.label}
                     </Link>
                   </li>
@@ -118,8 +115,8 @@ const Footer = () => (
             <ul className="mt-4 space-y-3">
               {contacts.map((c) => (
                 <li key={c.label}>
-                  <a href={c.href} className="group flex items-center gap-3 text-sm text-stone-500 transition-colors hover:text-emerald-600">
-                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-stone-200 bg-white text-emerald-600 transition-colors group-hover:border-emerald-400">
+                  <a href={c.href} className="group flex items-center gap-3 text-sm text-stone-500 transition-colors hover:text-orange-600">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-stone-200 bg-white text-orange-600 transition-colors group-hover:border-orange-400">
                       {c.icon}
                     </span>
                     {c.label}
@@ -139,7 +136,7 @@ const Footer = () => (
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="grid h-10 w-10 place-items-center rounded-xl border border-stone-200 bg-white text-stone-700 transition hover:border-emerald-500 hover:bg-emerald-500 hover:text-white"
+                    className="grid h-10 w-10 place-items-center rounded-xl border border-stone-200 bg-white text-stone-700 transition hover:border-orange-500 hover:bg-orange-500 hover:text-white"
                   >
                     <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       {s.d}
@@ -153,7 +150,7 @@ const Footer = () => (
 
         <div className="flex flex-col gap-4 border-t border-stone-200 py-6 text-sm text-stone-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Devskarnel. All rights reserved.</p>
-          <a href="#top" className="inline-flex items-center gap-2 font-medium text-stone-700 transition-colors hover:text-emerald-600">
+          <a href="#top" className="inline-flex items-center gap-2 font-medium text-stone-700 transition-colors hover:text-orange-600">
             Back to top
             <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M10 16V4M5 9l5-5 5 5" />
