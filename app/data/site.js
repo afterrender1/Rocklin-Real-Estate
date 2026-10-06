@@ -5,7 +5,6 @@ export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.rocklin
 
 export const site = {
   name: "Rocklin Real Estate",
-  tagline: "Local knowledge. Real experience.",
   description:
     "New-construction homes for buyers and full-service property management for owners, across Southern and Northern Utah.",
   // Set to the real page, e.g. "https://www.facebook.com/rocklinrealestate"
