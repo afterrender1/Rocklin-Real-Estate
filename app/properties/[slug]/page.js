@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PropertyCard, { ArrowIcon } from "../../components/PropertyCard";
 import PropertyGallery from "../../components/property/PropertyGallery";
-import MortgageCalculator from "../../components/property/MortgageCalculator";
 import AgentContact from "../../components/property/AgentContact";
 import { formatNumber, formatPrice, getPropertyBySlug, properties } from "../../data/properties";
 
@@ -57,7 +56,7 @@ export default async function PropertyPage({ params }) {
   if (!property) notFound();
 
   const {
-    id, name, location, code, address, price, type, status, beds, baths, area, lotSize,
+    name, location, code, address, price, type, status, beds, baths, area, lotSize,
     garage, yearBuilt, gallery, description, features, nearby, agent, summary,
   } = property;
 
@@ -71,11 +70,9 @@ export default async function PropertyPage({ params }) {
   ];
 
   const details = [
-    ["Property ID", `SKY-${String(id).padStart(4, "0")}`],
     ["Property type", type],
     ["Status", status],
     ["Price", formatPrice(price)],
-    ["Price per sqft", formatPrice(price / area)],
     ["Living area", `${formatNumber(area)} sqft`],
     ["Lot size", `${formatNumber(lotSize)} sqft`],
     ["Bedrooms", beds],
@@ -117,7 +114,6 @@ export default async function PropertyPage({ params }) {
               <div className="md:text-right">
                 <p className="text-sm text-white/60">Asking price</p>
                 <p className="text-3xl font-bold text-white sm:text-4xl">{formatPrice(price)}</p>
-                <p className="mt-1 text-sm text-orange-300">{formatPrice(price / area)} / sqft</p>
               </div>
             </div>
 
@@ -174,10 +170,6 @@ export default async function PropertyPage({ params }) {
                   </li>
                 ))}
               </ul>
-            </Section>
-
-            <Section title="Mortgage Calculator" id="mortgage">
-              <MortgageCalculator price={price} />
             </Section>
 
             <Section title="Location & Nearby" id="location">

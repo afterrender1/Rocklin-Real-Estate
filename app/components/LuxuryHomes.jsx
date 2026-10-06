@@ -62,7 +62,7 @@ const LuxuryHomes = () => {
         className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth scroll-px-4 px-4 pb-8 pt-4 [scrollbar-width:none] sm:scroll-px-6 sm:px-6 lg:scroll-px-[max(2rem,calc((100vw-80rem)/2+2rem))] lg:px-[max(2rem,calc((100vw-80rem)/2+2rem))] [&::-webkit-scrollbar]:hidden"
       >
         {properties.map((p) => (
-          <PropertyCard key={p.id} property={p} className="w-[280px] shrink-0 snap-start sm:w-[320px]" />
+          <PropertyCard key={p.id} property={p} className="w-[85vw] max-w-[420px] shrink-0 snap-start sm:w-[420px] lg:w-[480px] lg:max-w-none" />
         ))}
       </div>
 
