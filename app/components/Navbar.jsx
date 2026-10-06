@@ -8,13 +8,15 @@ import { contact } from "../data/contact";
 
 const navLinks = [
   { label: "Listings", href: "/properties" },
-  { label: "Property Management", href: "/contact" },
-  { label: "Rentals", href: "/properties" },
+  { label: "Property Management", href: "/contact?interest=property-management" },
+  { label: "Rentals", href: "/rentals" },
   { label: "Agents", href: "/agents" },
   { label: "About", href: "/about" },
 ];
 
-const isActive = (pathname, href) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+// Links with a query (e.g. Property Management -> /contact?interest=...) never show as the current page
+const isActive = (pathname, href) =>
+  href.includes("?") ? false : href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 const isLinkActive = (pathname, link) =>
   link.children ? link.children.some((c) => isActive(pathname, c.href)) : isActive(pathname, link.href);
 

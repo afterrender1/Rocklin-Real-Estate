@@ -1,22 +1,45 @@
 import Link from "next/link";
 import ContactForm from "../components/ContactForm";
-import { contact } from "../data/contact";
+import { contact, interestFromSlug } from "../data/contact";
+import { pageMetadata } from "../data/site";
 
-export const metadata = {
-  title: "Contact | Rocklin Real Estate",
-  description: "Get in touch with Rocklin Real Estate. We reply within one business day.",
+export const metadata = pageMetadata({
+  title: "Contact Us",
+  description:
+    "Contact Rocklin Real Estate in St. George, Utah. Call (801) 425-3478 or visit 720 S River Rd, Suite B110. We reply within one business day.",
+  path: "/contact",
+});
+
+const icon = (d) => (
+  <svg viewBox="0 0 24 24" className="h-4.5 w-4.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    {d}
+  </svg>
+);
+
+const icons = {
+  phone: icon(<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" />),
+  email: icon(<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>),
+  office: icon(<><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z" /><circle cx="12" cy="9.5" r="2.5" /></>),
+  hours: icon(<><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>),
 };
 
-const Row = ({ label, children }) => (
+const Row = ({ label, icon, children }) => (
   <div className="grid gap-1 border-b border-stone-200 py-5 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-4">
-    <dt className="text-sm text-stone-500">{label}</dt>
-    <dd className="text-stone-900">{children}</dd>
+    <dt className="flex items-center gap-2.5 text-sm text-stone-500 sm:items-start sm:pt-0.5">
+      <span className="text-orange-600">{icon}</span>
+      {label}
+    </dt>
+    <dd className="pl-7 text-stone-900 sm:pl-0">{children}</dd>
   </div>
 );
 
 const linkClass = "underline-offset-4 hover:text-orange-700 hover:underline";
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }) {
+  // ?interest=property-management pre-selects "Property management" in the form
+  const { interest } = await searchParams;
+  const defaultInterest = interestFromSlug(interest);
+
   return (
     <main className="bg-white">
       {/* Solid strip behind the transparent navbar */}
@@ -41,18 +64,18 @@ export default function ContactPage() {
           <section aria-labelledby="details-heading">
             <h2 id="details-heading" className="text-lg font-semibold text-stone-900">Get in touch</h2>
             <dl className="mt-3 border-t border-stone-200">
-              <Row label="Phone">
+              <Row label="Phone" icon={icons.phone}>
                 <a href={contact.phoneHref} className={linkClass}>{contact.phone}</a>
               </Row>
-              <Row label="Email">
+              <Row label="Email" icon={icons.email}>
                 <a href={`mailto:${contact.email}`} className={`break-all ${linkClass}`}>{contact.email}</a>
               </Row>
-              <Row label="Office">
+              <Row label="Office" icon={icons.office}>
                 <a href={contact.mapsUrl} target="_blank" rel="noopener noreferrer" className={linkClass}>
                   {contact.address}
                 </a>
               </Row>
-              <Row label="Hours">
+              <Row label="Hours" icon={icons.hours}>
                 <ul className="space-y-1">
                   {contact.hours.map(([days, time]) => (
                     <li key={days}>
@@ -67,7 +90,7 @@ export default function ContactPage() {
           <section aria-labelledby="form-heading">
             <h2 id="form-heading" className="text-lg font-semibold text-stone-900">Send a message</h2>
             <div className="mt-3">
-              <ContactForm />
+              <ContactForm {...(defaultInterest && { defaultInterest })} />
             </div>
           </section>
         </div>

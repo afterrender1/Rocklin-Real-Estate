@@ -36,13 +36,13 @@ const Hero = () => {
 
         <div data-animate="hero" className="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-4">
           <Link
-            href="https://www.rocklinutah.com/listings"
+            href="/properties"
             className="w-full rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-slate-900 shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl sm:w-auto"
           >
             View listings
           </Link>
           <Link
-            href="https://www.rocklinutah.com/property-management"
+            href="/contact?interest=property-management"
             className="w-full rounded-full border border-white/40 px-8 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/10 sm:w-auto"
           >
             Property management

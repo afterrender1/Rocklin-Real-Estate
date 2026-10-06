@@ -5,20 +5,87 @@ import PropertyGallery from "../../components/property/PropertyGallery";
 import AgentContact from "../../components/property/AgentContact";
 import { formatListingPrice, formatNumber, getPropertyBySlug, isForRent, properties } from "../../data/properties";
 import { getAgentById } from "../../data/agents";
+import { absoluteUrl, jsonLd, pageMetadata } from "../../data/site";
 
 export function generateStaticParams() {
   return properties.map((p) => ({ slug: p.slug }));
 }
 
+// Every listing in a community shares a name, so the street keeps titles unique
+const streetOf = (address) => address.split(", ")[0];
+
+const describe = (p) =>
+  `${p.status}: ${p.beds}-bed, ${p.baths}-bath ${p.type.toLowerCase()} with ${formatNumber(p.area)} sqft at ${p.address}. ${formatListingPrice(p)}. ${p.summary}`;
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const property = getPropertyBySlug(slug);
-  if (!property) return { title: "Property not found | Rocklin Real Estate" };
-  return {
-    title: `${property.name}, ${property.location} | Rocklin Real Estate`,
-    description: property.summary,
-  };
+  if (!property) return { title: "Property not found", robots: { index: false } };
+  return pageMetadata({
+    title: `${streetOf(property.address)}, ${property.location} – ${property.type} ${property.status}`,
+    description: describe(property),
+    path: `/properties/${property.slug}`,
+    images: [{ url: property.image, alt: `${property.name}, ${property.address}` }],
+  });
 }
+
+const listingSchema = (p, agent) => {
+  const [street, locality, regionPostal = ""] = p.address.split(", ");
+  const [region, postalCode] = regionPostal.split(" ");
+  const url = absoluteUrl(`/properties/${p.slug}`);
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "RealEstateListing",
+        "@id": `${url}#listing`,
+        url,
+        name: `${p.name}, ${p.address}`,
+        description: describe(p),
+        image: p.gallery.map((src) => absoluteUrl(src)),
+        offers: {
+          "@type": "Offer",
+          price: p.price,
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+          businessFunction: `http://purl.org/goodrelations/v1#${isForRent(p) ? "LeaseOut" : "Sell"}`,
+          ...(isForRent(p) && {
+            priceSpecification: { "@type": "UnitPriceSpecification", price: p.price, priceCurrency: "USD", unitCode: "MON" },
+          }),
+          seller: { "@id": `${absoluteUrl("/")}#organization` },
+        },
+        about: {
+          "@type": "House",
+          name: p.name,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: street,
+            addressLocality: locality,
+            addressRegion: region,
+            postalCode,
+            addressCountry: p.code,
+          },
+          numberOfBedrooms: p.beds,
+          numberOfBathroomsTotal: p.baths,
+          floorSize: { "@type": "QuantitativeValue", value: p.area, unitCode: "FTK" },
+          yearBuilt: p.yearBuilt,
+          amenityFeature: p.features.map((f) => ({ "@type": "LocationFeatureSpecification", name: f, value: true })),
+        },
+        ...(agent && {
+          provider: { "@type": "RealEstateAgent", name: agent.name, telephone: agent.phone, email: agent.email },
+        }),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+          { "@type": "ListItem", position: 2, name: "Properties", item: absoluteUrl("/properties") },
+          { "@type": "ListItem", position: 3, name: `${p.name}, ${street}`, item: url },
+        ],
+      },
+    ],
+  };
+};
 
 const icon = (d) => (
   <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -86,6 +153,7 @@ export default async function PropertyPage({ params }) {
 
   return (
     <main className="bg-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(listingSchema(property, agent))} />
       {/* Solid strip behind the transparent navbar */}
       <div className="h-20 bg-stone-950 sm:h-24" />
 
@@ -192,7 +260,7 @@ export default async function PropertyPage({ params }) {
 
         {agent && (
           <aside className="min-w-0 lg:sticky lg:top-28 lg:self-start">
-            <AgentContact agent={agent} propertyName={name} />
+            <AgentContact agent={agent} propertyName={`${name}, ${address}`} />
           </aside>
         )}
       </div>

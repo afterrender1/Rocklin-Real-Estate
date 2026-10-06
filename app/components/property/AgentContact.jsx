@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { submitEnquiry } from "../submitEnquiry";
 
 const inputClass =
   // 16px text on phones stops iOS from zooming into inputs on focus
@@ -10,11 +11,30 @@ const inputClass =
 const AgentContact = ({ agent, propertyName }) => {
   const [mode, setMode] = useState("tour");
   const [tourType, setTourType] = useState("In person");
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | sending | sent
+  const [error, setError] = useState("");
+  const sent = status === "sent";
+  const setSent = (value) => setStatus(value ? "sent" : "idle");
+  // Local date, so the picker never offers days in the past
+  const today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
+    setStatus("sending");
+    setError("");
+    const err = await submitEnquiry({
+      type: mode === "tour" ? "tour" : "info",
+      property: propertyName,
+      agent: agent.name,
+      ...(mode === "tour" && { tourType }),
+      ...Object.fromEntries(new FormData(e.currentTarget)),
+    });
+    if (err) {
+      setError(err);
+      setStatus("idle");
+      return;
+    }
+    setStatus("sent");
   };
 
   return (
@@ -79,7 +99,7 @@ const AgentContact = ({ agent, propertyName }) => {
         </div>
 
         {sent ? (
-          <div className="mt-6 rounded-xl bg-stone-50 p-6 text-center">
+          <div role="status" className="mt-6 rounded-xl bg-stone-50 p-6 text-center">
             <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-green-600 text-white">
               <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m5 12 5 5 9-10" />
@@ -92,6 +112,8 @@ const AgentContact = ({ agent, propertyName }) => {
           </div>
         ) : (
           <form onSubmit={onSubmit} className="mt-5 space-y-3">
+            {/* Honeypot: hidden from people, filled in by bots */}
+            <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
             {mode === "tour" && (
               <>
                 <div className="grid grid-cols-2 gap-2">
@@ -109,30 +131,37 @@ const AgentContact = ({ agent, propertyName }) => {
                   ))}
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  <input type="date" required aria-label="Tour date" className={inputClass} />
-                  <select required aria-label="Tour time" defaultValue="" className={inputClass}>
+                  <input type="date" name="tourDate" min={today} required aria-label="Tour date" className={inputClass} />
+                  <select name="tourTime" required aria-label="Tour time" defaultValue="" className={inputClass}>
                     <option value="" disabled>Time</option>
-                    {["10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM", "6:00 PM"].map((t) => (
+                    {["9:00 AM", "11:00 AM", "1:00 PM", "3:00 PM", "4:30 PM"].map((t) => (
                       <option key={t}>{t}</option>
                     ))}
                   </select>
                 </div>
               </>
             )}
-            <input required placeholder="Full name" aria-label="Full name" className={inputClass} />
-            <input required type="email" placeholder="Email address" aria-label="Email address" className={inputClass} />
-            <input type="tel" placeholder="Phone number" aria-label="Phone number" className={inputClass} />
+            <input required name="name" autoComplete="name" placeholder="Full name" aria-label="Full name" className={inputClass} />
+            <input required type="email" name="email" autoComplete="email" placeholder="Email address" aria-label="Email address" className={inputClass} />
+            <input type="tel" name="phone" autoComplete="tel" placeholder="Phone number" aria-label="Phone number" className={inputClass} />
             <textarea
+              name="message"
               rows={3}
               aria-label="Message"
               defaultValue={`I'm interested in ${propertyName}. Please send me more details.`}
               className={`${inputClass} resize-none`}
             />
+            {error && (
+              <p role="alert" className="rounded-lg bg-red-50 px-3.5 py-2.5 text-sm text-red-700">
+                {error}
+              </p>
+            )}
             <button
               type="submit"
-              className="w-full rounded-lg bg-orange-600 py-3 text-sm font-semibold text-white transition hover:bg-orange-700"
+              disabled={status === "sending"}
+              className="w-full rounded-lg bg-orange-600 py-3 text-sm font-semibold text-white transition hover:bg-orange-700 disabled:cursor-wait disabled:opacity-70"
             >
-              {mode === "tour" ? "Request a Tour" : "Send Message"}
+              {status === "sending" ? "Sending…" : mode === "tour" ? "Request a Tour" : "Send Message"}
             </button>
           </form>
         )}

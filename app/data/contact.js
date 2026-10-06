@@ -10,3 +10,9 @@ export const contact = {
     ["Saturday – Sunday", "By appointment"],
   ],
 };
+
+// Options for "I'm interested in" on the contact form
+export const interests = ["Buying", "Selling", "Renting", "Property management"];
+
+// "property-management" -> "Property management", for links like /contact?interest=property-management
+export const interestFromSlug = (slug) => interests.find((i) => i.toLowerCase().replace(/\s+/g, "-") === slug);

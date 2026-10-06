@@ -2,11 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import ShaderBackground from "./ShaderBackground";
 import { contact } from "../data/contact";
+import { site } from "../data/site";
 
 const exploreLinks = [
   { label: "Listings", href: "/properties" },
-  { label: "Property Management", href: "/contact" },
-  { label: "Rentals", href: "/properties" },
+  { label: "Property Management", href: "/contact?interest=property-management" },
+  { label: "Rentals", href: "/rentals" },
   { label: "Agents", href: "/agents" },
   { label: "About", href: "/about" },
 ];
@@ -35,7 +36,7 @@ const contacts = [
 ];
 
 const socials = [
-  { label: "Facebook", href: "https://www.facebook.com", d: <><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M15 8h-2a2 2 0 0 0-2 2v11M9 13h6" /></> },
+  { label: "Facebook", href: site.facebook || "https://www.facebook.com", d: <><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M15 8h-2a2 2 0 0 0-2 2v11M9 13h6" /></> },
 ];
 
 const Footer = () => (

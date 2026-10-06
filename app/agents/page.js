@@ -1,11 +1,14 @@
 import PageHeader from "../components/PageHeader";
 import AgentCard from "../components/AgentCard";
 import { getAgents } from "../data/agents";
+import { pageMetadata } from "../data/site";
 
-export const metadata = {
-  title: "Our Agents | Rocklin Real Estate",
-  description: "Meet the Rocklin agents who will guide you through buying, selling and investing.",
-};
+export const metadata = pageMetadata({
+  title: "Our Agents",
+  description:
+    "Contact Rocklin Real Estate agents in St. George and Park City, Utah. Call or email our brokers and agents directly.",
+  path: "/agents",
+});
 
 export default async function AgentsPage() {
   const agents = await getAgents();

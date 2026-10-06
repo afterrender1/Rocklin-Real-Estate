@@ -1,39 +1,23 @@
-import Link from "next/link";
-import PropertyCard from "../components/PropertyCard";
+import ListingsPage from "../components/ListingsPage";
 import { properties } from "../data/properties";
+import { pageMetadata } from "../data/site";
 
-export const metadata = {
-  title: "Properties | Rocklin Real Estate",
-  description: "Browse luxury homes for sale around the world.",
-};
+export const metadata = pageMetadata({
+  title: "Homes for Sale & Rent in St. George, Utah",
+  description:
+    "Browse new-construction townhomes for sale and rent in St. George, Utah, including Rockland Townhomes, from Rocklin Real Estate.",
+  path: "/properties",
+});
 
 export default function PropertiesPage() {
   return (
-    <>
-      <main className="bg-stone-50">
-        <section className="bg-stone-950 pb-16 pt-32 sm:pb-20 sm:pt-36">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <nav data-animate="hero" aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-white/60">
-              <Link href="/" className="transition-colors hover:text-orange-300">Home</Link>
-              <span>/</span>
-              <span className="text-white">Properties</span>
-            </nav>
-            <h1 data-animate="hero" className="mt-5 text-[2rem] font-semibold leading-[1.1] tracking-tight text-white min-[400px]:text-4xl sm:text-5xl">
-              All{" "}
-              <span className="bg-gradient-to-r from-orange-400 to-orange-200 bg-clip-text text-transparent">Properties</span>
-            </h1>
-            <p data-animate="hero" className="mt-4 max-w-xl text-white/70 sm:text-lg">
-              {properties.length} handpicked luxury homes in the world&apos;s most desirable locations.
-            </p>
-          </div>
-        </section>
-
-        <div className="mx-auto grid max-w-7xl gap-6 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 lg:px-8 lg:py-20">
-          {properties.map((p) => (
-            <PropertyCard key={p.id} property={p} />
-          ))}
-        </div>
-      </main>
-    </>
+    <ListingsPage
+      active="/properties"
+      crumb="Properties"
+      title="All"
+      highlight="Properties"
+      description={`${properties.length} new-construction homes for sale and rent in St. George, Utah.`}
+      items={properties}
+    />
   );
 }

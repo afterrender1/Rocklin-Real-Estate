@@ -3,11 +3,14 @@ import PageHeader from "../components/PageHeader";
 import AgentCard, { mailIcon, phoneIcon, telHref } from "../components/AgentCard";
 import { founder, intro, team, values, valuesIntro, visionMission } from "../data/about";
 import { getAgents } from "../data/agents";
+import { pageMetadata } from "../data/site";
 
-export const metadata = {
-  title: "About Us | Rocklin Real Estate",
-  description: intro.text,
-};
+export const metadata = pageMetadata({
+  title: "About Us",
+  description:
+    "Rocklin Real Estate makes property ownership and home sales simple across Utah. Meet broker Damon Stewart and our St. George and Park City agents.",
+  path: "/about",
+});
 
 const initials = founder.name.split(" ").map((p) => p[0]).join("");
 
