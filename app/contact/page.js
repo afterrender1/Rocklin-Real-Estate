@@ -2,8 +2,8 @@ import PageHeader from "../components/PageHeader";
 import ContactForm from "../components/ContactForm";
 
 export const metadata = {
-  title: "Contact | Skyline Real Estate",
-  description: "Get in touch with Skyline Real Estate. Our agents reply within one business day.",
+  title: "Contact | Rocklin Real Estate",
+  description: "Get in touch with Rocklin Real Estate. Our agents reply within one business day.",
 };
 
 const icon = (d) => (
@@ -97,7 +97,7 @@ export default function ContactPage() {
       <div data-animate="fade-up" className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
         <div className="aspect-[16/9] overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 sm:aspect-[21/9]">
           <iframe
-            title="Skyline Los Angeles office"
+            title="Rocklin Los Angeles office"
             src={`https://maps.google.com/maps?q=${encodeURIComponent(offices[0].address)}&z=14&output=embed`}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

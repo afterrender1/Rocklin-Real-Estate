@@ -63,7 +63,7 @@ const Faq = ({ hideHeading = false }) => {
               <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">Questions</span>
             </h2>
             <p className="mt-4 text-base text-stone-500 sm:text-lg">
-              Everything you need to know about buying, selling and investing with Skyline.
+              Everything you need to know about buying, selling and investing with Rocklin.
             </p>
           </div>
         )}

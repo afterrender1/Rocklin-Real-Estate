@@ -13,9 +13,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const property = getPropertyBySlug(slug);
-  if (!property) return { title: "Property not found | Skyline Real Estate" };
+  if (!property) return { title: "Property not found | Rocklin Real Estate" };
   return {
-    title: `${property.name}, ${property.location} | Skyline Real Estate`,
+    title: `${property.name}, ${property.location} | Rocklin Real Estate`,
     description: property.summary,
   };
 }

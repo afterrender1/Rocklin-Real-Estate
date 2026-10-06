@@ -2,8 +2,8 @@ import PageHeader from "../components/PageHeader";
 import Faq from "../components/Faq";
 
 export const metadata = {
-  title: "FAQ | Skyline Real Estate",
-  description: "Answers to common questions about buying, selling and investing with Skyline.",
+  title: "FAQ | Rocklin Real Estate",
+  description: "Answers to common questions about buying, selling and investing with Rocklin.",
 };
 
 export default function FaqPage() {
@@ -13,7 +13,7 @@ export default function FaqPage() {
         crumb="FAQ"
         title="Frequently Asked"
         highlight="Questions"
-        description="Everything you need to know about buying, selling and investing with Skyline."
+        description="Everything you need to know about buying, selling and investing with Rocklin."
       />
       <Faq hideHeading />
     </main>

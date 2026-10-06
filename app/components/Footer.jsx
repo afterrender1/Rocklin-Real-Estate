@@ -60,7 +60,7 @@ const Footer = () => (
         Ready to find your dream home?
       </h2>
       <p className="mx-auto mt-4 max-w-xl text-base text-white/80 sm:text-lg">
-        Book a free consultation and discover how Skyline can help you buy, sell or invest with confidence.
+        Book a free consultation and discover how Rocklin can help you buy, sell or invest with confidence.
       </p>
       <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <Link
@@ -82,10 +82,19 @@ const Footer = () => (
     <div className="mx-auto mt-3 max-w-[96rem] rounded-3xl border border-stone-200 bg-stone-50 sm:mt-4">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="flex flex-col gap-4 border-b border-stone-200 py-10 sm:flex-row sm:items-center sm:justify-between">
-          <Link href="/" aria-label="Skyline Real Estate home" className="inline-flex">
-            <Image src="/logo/logo-horizontal-dark.webp" alt="Skyline Real Estate" width={953} height={240} className="h-11 w-auto sm:h-12" />
+          <Link href="/" aria-label="Rocklin Real Estate home" className="group inline-flex items-center gap-2.5">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 text-white shadow-md transition group-hover:scale-105 sm:h-11 sm:w-11">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                <path d="M3 21h18M3 10l9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10z" />
+                <path d="M9 21V12h6v9" />
+              </svg>
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="text-xl font-bold tracking-wider text-stone-900 sm:text-2xl leading-tight">ROCKLIN</span>
+              <span className="text-[10px] font-semibold tracking-widest text-emerald-600 uppercase leading-none">REAL ESTATE</span>
+            </div>
           </Link>
-          <p className="text-sm text-stone-600">Your trusted guide to finding your dream home.</p>
+          <p className="text-sm text-stone-600">Local knowledge. Real experience. Real Estate Done Right.</p>
         </div>
 
         <div className="grid grid-cols-2 gap-10 py-10 md:grid-cols-4 lg:grid-cols-[repeat(4,minmax(0,1fr))_auto]">

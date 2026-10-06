@@ -18,29 +18,34 @@ const Hero = () => {
       <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-black/40 to-transparent" />
 
       <div className="mx-auto w-full max-w-7xl px-4 pb-24 pt-32 text-center sm:px-6 sm:pt-36 lg:px-8 lg:pt-40">
-    
+        <div
+          data-animate="hero"
+          className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur-sm sm:text-sm"
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+          Local knowledge. Real experience.
+        </div>
 
-        <h1 data-animate="hero" className="mx-auto max-w-4xl text-[2.1rem] font-semibold leading-[1.1] min-[400px]:text-4xl tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-          Trusted Guide Finding Your Dream Home
+        <h1 data-animate="hero" className="mx-auto max-w-4xl text-[2.2rem] font-semibold leading-[1.1] min-[400px]:text-4xl tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+          Real Estate. Done Right.
         </h1>
 
-        <p data-animate="hero" className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg">
-          Finding the perfect home is more than just a transaction — it&apos;s a
-          journey filled with possibilities and dreams.
+        <p data-animate="hero" className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/90 sm:mt-6 sm:text-lg">
+          Buying, building, selling or managing a home shouldn&apos;t feel complicated. We handle the details, communicate clearly, and make sure the little things get done.
         </p>
 
         <div data-animate="hero" className="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-4">
           <Link
-            href="/properties"
+            href="https://www.rocklinutah.com/listings"
             className="w-full rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-slate-900 shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl sm:w-auto"
           >
-            Explore Properties
+            View listings
           </Link>
           <Link
-            href="/contact"
+            href="https://www.rocklinutah.com/property-management"
             className="w-full rounded-full border border-white/40 px-8 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/10 sm:w-auto"
           >
-            Contact an Agent
+            Property management
           </Link>
         </div>
       </div>

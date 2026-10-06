@@ -11,14 +11,14 @@ const manrope = Manrope({
 });
 
 export const metadata = {
-  title: "Skyline Real Estate",
-  description: "Your trusted guide to finding your dream home.",
-  applicationName: "Skyline Real Estate",
+  title: "Rocklin Real Estate",
+  description: "Local knowledge. Real experience. Real Estate Done Right.",
+  applicationName: "Rocklin Real Estate",
   openGraph: {
     type: "website",
-    siteName: "Skyline Real Estate",
-    title: "Skyline Real Estate",
-    description: "Your trusted guide to finding your dream home.",
+    siteName: "Rocklin Real Estate",
+    title: "Rocklin Real Estate",
+    description: "Local knowledge. Real experience. Real Estate Done Right.",
   },
   twitter: { card: "summary_large_image" },
 };

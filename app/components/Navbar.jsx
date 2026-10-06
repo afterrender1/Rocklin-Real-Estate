@@ -23,16 +23,18 @@ const isActive = (pathname, href) => (href === "/" ? pathname === "/" : pathname
 const isLinkActive = (pathname, link) =>
   link.children ? link.children.some((c) => isActive(pathname, c.href)) : isActive(pathname, link.href);
 
-const Logo = ({ onClick, preload = false }) => (
-  <Link href="/" onClick={onClick} aria-label="Skyline Real Estate home" className="flex shrink-0 items-center">
-    <Image
-      src="/logo/logo-horizontal-light.webp"
-      alt="Skyline Real Estate"
-      width={953}
-      height={240}
-      preload={preload}
-      className="h-9 w-auto sm:h-10"
-    />
+const Logo = ({ onClick }) => (
+  <Link href="/" onClick={onClick} aria-label="Rocklin Real Estate home" className="group flex shrink-0 items-center gap-2.5">
+    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-md transition group-hover:scale-105 sm:h-10 sm:w-10">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 sm:h-6 sm:w-6">
+        <path d="M3 21h18M3 10l9-7 9 7v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10z" />
+        <path d="M9 21V12h6v9" />
+      </svg>
+    </div>
+    <div className="flex flex-col text-left">
+      <span className="text-base font-bold tracking-wider text-white sm:text-lg leading-tight">ROCKLIN</span>
+      <span className="text-[9px] font-semibold tracking-widest text-emerald-400 uppercase leading-none">REAL ESTATE</span>
+    </div>
   </Link>
 );
 

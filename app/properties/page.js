@@ -3,7 +3,7 @@ import PropertyCard from "../components/PropertyCard";
 import { properties } from "../data/properties";
 
 export const metadata = {
-  title: "Properties | Skyline Real Estate",
+  title: "Properties | Rocklin Real Estate",
   description: "Browse luxury homes for sale around the world.",
 };
 

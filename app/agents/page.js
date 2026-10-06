@@ -4,8 +4,8 @@ import PageHeader from "../components/PageHeader";
 import { agents, getAgentListings } from "../data/properties";
 
 export const metadata = {
-  title: "Our Agents | Skyline Real Estate",
-  description: "Meet the Skyline agents who will guide you through buying, selling and investing.",
+  title: "Our Agents | Rocklin Real Estate",
+  description: "Meet the Rocklin agents who will guide you through buying, selling and investing.",
 };
 
 const VerifiedBadge = () => (

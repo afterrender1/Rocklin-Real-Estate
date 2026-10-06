@@ -4,8 +4,8 @@ export const faqCategories = [
     label: "General Information",
     faqs: [
       {
-        q: "What is Skyline Real Estate?",
-        a: "Skyline is a full-service real estate agency specialising in premium and luxury homes. We help you buy, sell, rent and invest in properties across Europe and North America, with a dedicated agent guiding you from the first search to handing over the keys.",
+        q: "What is Rocklin Real Estate?",
+        a: "Rocklin is a full-service real estate agency specialising in premium and luxury homes. We help you buy, sell, rent and invest in properties across Europe and North America, with a dedicated agent guiding you from the first search to handing over the keys.",
       },
       {
         q: "Which locations do you cover?",
@@ -30,7 +30,7 @@ export const faqCategories = [
         a: "Browse our listings, shortlist the homes you like and request a tour. Your agent will then help you with viewings, price negotiation, legal checks and closing.",
       },
       {
-        q: "Can international buyers purchase through Skyline?",
+        q: "Can international buyers purchase through Rocklin?",
         a: "Absolutely. A large share of our clients buy from abroad. We coordinate remote viewings, local lawyers, tax advisors and translators so the process is smooth wherever you live.",
       },
       {
@@ -62,7 +62,7 @@ export const faqCategories = [
     label: "Pricing & Fees",
     faqs: [
       {
-        q: "Do buyers pay a fee to Skyline?",
+        q: "Do buyers pay a fee to Rocklin?",
         a: "In most markets our fee is paid by the seller, so buyers don't pay us anything. Where local rules differ, your agent will explain any costs upfront before you commit.",
       },
       {

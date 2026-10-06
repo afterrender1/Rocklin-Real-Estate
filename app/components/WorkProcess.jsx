@@ -109,7 +109,7 @@ const WorkProcess = () => {
               A simpler, smarter way to buy, rent, or invest in property.
             </p>
             <p className="leading-relaxed text-stone-500">
-              At <strong className="font-semibold text-stone-800">Skyline Real Estate</strong>, we believe finding your perfect property should be as seamless as living in it. Our dedicated experts bring years of local market knowledge to ensure your real estate journey is effortless, transparent, and rewarding from the first search to the final signature.
+              At <strong className="font-semibold text-stone-800">Rocklin Real Estate</strong>, we believe finding your perfect property should be as seamless as living in it. Our dedicated experts bring years of local market knowledge to ensure your real estate journey is effortless, transparent, and rewarding from the first search to the final signature.
             </p>
           </div>
         </div>

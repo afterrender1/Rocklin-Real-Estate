@@ -5,8 +5,8 @@ import WorkProcess from "../components/WorkProcess";
 import { ArrowIcon } from "../components/PropertyCard";
 
 export const metadata = {
-  title: "About Us | Skyline Real Estate",
-  description: "Learn about Skyline Real Estate, our story, values and the team behind your next home.",
+  title: "About Us | Rocklin Real Estate",
+  description: "Learn about Rocklin Real Estate, our story, values and the team behind your next home.",
 };
 
 const stats = [
@@ -52,7 +52,7 @@ export default function AboutPage() {
         crumb="About Us"
         title="Building Trust,"
         highlight="One Home at a Time"
-        description="For over a decade, Skyline has helped families and investors find homes they love in the world's most desirable places."
+        description="For over a decade, Rocklin has helped families and investors find homes they love in the world's most desirable places."
       />
 
       {/* Story */}
@@ -61,7 +61,7 @@ export default function AboutPage() {
           <div data-animate="left" className="relative aspect-[4/3] overflow-hidden rounded-3xl">
             <Image
               src="/images/sky-hero-bg.webp"
-              alt="Modern home sold by Skyline"
+              alt="Modern home sold by Rocklin"
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
@@ -77,7 +77,7 @@ export default function AboutPage() {
             </h2>
             <div className="mt-5 space-y-4 leading-relaxed text-stone-600">
               <p>
-                Skyline started in 2013 with three agents and one belief: buying a home should feel exciting, not
+                Rocklin started in 2013 with three agents and one belief: buying a home should feel exciting, not
                 stressful. We focused on honest advice, beautiful homes and treating every client like family.
               </p>
               <p>
