@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import PropertyCard, { ArrowIcon } from "../../components/PropertyCard";
+import PropertyCard from "../../components/PropertyCard";
 import PropertyGallery from "../../components/property/PropertyGallery";
 import AgentContact from "../../components/property/AgentContact";
 import { formatNumber, formatPrice, getPropertyBySlug, properties } from "../../data/properties";
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
 }
 
 const icon = (d) => (
-  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
     {d}
   </svg>
 );
@@ -34,19 +34,16 @@ const icons = {
   year: icon(<><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18M8 3v4M16 3v4" /></>),
   pin: icon(<><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z" /><circle cx="12" cy="9.5" r="2.5" /></>),
   check: (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
       <path d="m5 12 5 5 9-10" />
     </svg>
   ),
 };
 
 const Section = ({ title, children, id }) => (
-  <section id={id} data-animate="fade-up" className="scroll-mt-28 rounded-3xl border border-stone-200 bg-white p-5 sm:p-8">
-    <h2 className="flex items-center gap-3 text-xl font-semibold text-stone-900 sm:text-2xl">
-      <span className="h-6 w-1 rounded-full bg-orange-500" />
-      {title}
-    </h2>
-    <div className="mt-6">{children}</div>
+  <section id={id} className="scroll-mt-28 py-8 first:pt-0">
+    <h2 className="text-lg font-semibold text-stone-900 sm:text-xl">{title}</h2>
+    <div className="mt-4">{children}</div>
   </section>
 );
 
@@ -56,17 +53,17 @@ export default async function PropertyPage({ params }) {
   if (!property) notFound();
 
   const {
-    name, location, code, address, price, type, status, beds, baths, area, lotSize,
+    name, code, address, price, type, status, beds, baths, area, lotSize,
     garage, yearBuilt, gallery, description, features, nearby, agent, summary,
   } = property;
 
   const facts = [
-    { label: "Bedrooms", value: beds, icon: icons.bed },
-    { label: "Bathrooms", value: baths, icon: icons.bath },
-    { label: "Living area", value: `${formatNumber(area)} sqft`, icon: icons.area },
-    { label: "Lot size", value: `${formatNumber(lotSize)} sqft`, icon: icons.lot },
-    { label: "Garage", value: `${garage} cars`, icon: icons.garage },
-    { label: "Year built", value: yearBuilt, icon: icons.year },
+    { label: "Beds", value: beds, icon: icons.bed },
+    { label: "Baths", value: baths, icon: icons.bath },
+    { label: "Sqft", value: formatNumber(area), icon: icons.area },
+    { label: "Lot sqft", value: formatNumber(lotSize), icon: icons.lot },
+    { label: "Garage", value: garage, icon: icons.garage },
+    { label: "Built", value: yearBuilt, icon: icons.year },
   ];
 
   const details = [
@@ -86,142 +83,133 @@ export default async function PropertyPage({ params }) {
   const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&z=14&output=embed`;
 
   return (
-    <>
-      <main className="bg-stone-50">
-        {/* Header + gallery */}
-        <section className="bg-linear-to-b from-stone-950 from-65% to-stone-50 to-65% pt-28 sm:pt-32">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <nav data-animate="hero" aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm text-white/60">
-              <Link href="/" className="transition-colors hover:text-orange-300">Home</Link>
-              <span>/</span>
-              <Link href="/properties" className="transition-colors hover:text-orange-300">Properties</Link>
-              <span>/</span>
-              <span className="text-white">{name}</span>
-            </nav>
+    <main className="bg-white">
+      {/* Solid strip behind the transparent navbar */}
+      <div className="h-20 bg-stone-950 sm:h-24" />
 
-            <div data-animate="hero" className="mt-6 flex flex-col gap-6 pb-8 md:flex-row md:items-end md:justify-between">
-              <div>
-                <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-white">{status}</span>
-                  <span className="rounded-full border border-white/20 px-3 py-1 text-xs font-medium text-white/80">{type}</span>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 pt-6 text-sm text-stone-500">
+          <Link href="/" className="hover:text-stone-900 hover:underline">Home</Link>
+          <span aria-hidden="true">›</span>
+          <Link href="/properties" className="hover:text-stone-900 hover:underline">Properties</Link>
+          <span aria-hidden="true">›</span>
+          <span className="truncate text-stone-900">{name}</span>
+        </nav>
+
+        <header className="mt-5 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="min-w-0">
+            <div className="flex flex-wrap gap-2 text-xs font-medium">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-stone-300 px-2.5 py-1 text-stone-700">
+                <span className="h-1.5 w-1.5 rounded-full bg-green-600" />
+                {status}
+              </span>
+              <span className="rounded-full border border-stone-300 px-2.5 py-1 text-stone-700">{type}</span>
+            </div>
+            <h1 className="mt-3 text-2xl font-semibold tracking-tight text-stone-900 sm:text-3xl">{name}</h1>
+            <p className="mt-1.5 flex items-start gap-1.5 text-sm text-stone-600 sm:text-base">
+              <span className="mt-0.5 shrink-0 text-stone-400 [&_svg]:h-4 [&_svg]:w-4">{icons.pin}</span>
+              {address}
+            </p>
+          </div>
+          <div className="shrink-0 md:text-right">
+            <p className="text-2xl font-semibold text-stone-900 sm:text-3xl">{formatPrice(price)}</p>
+            <p className="text-sm text-stone-500">Asking price</p>
+          </div>
+        </header>
+
+        <div className="mt-6">
+          <PropertyGallery images={gallery} name={name} />
+        </div>
+
+        <ul className="mt-6 grid grid-cols-3 gap-y-5 border-y border-stone-200 py-5 sm:grid-cols-6">
+          {facts.map((f) => (
+            <li key={f.label} className="flex items-center gap-2.5 sm:justify-center">
+              <span className="shrink-0 text-stone-400">{f.icon}</span>
+              <span className="min-w-0 leading-tight">
+                <span className="block text-sm font-semibold text-stone-900 sm:text-base">{f.value}</span>
+                <span className="block text-xs text-stone-500">{f.label}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-14 lg:px-8">
+        <div className="min-w-0 divide-y divide-stone-200">
+          <Section title="Overview" id="overview">
+            <p className="font-medium text-stone-900">{summary}</p>
+            <div className="mt-3 space-y-3 text-[15px] leading-7 text-stone-600">
+              {description.map((para) => (
+                <p key={para.slice(0, 24)}>{para}</p>
+              ))}
+            </div>
+          </Section>
+
+          <Section title="Property details" id="details">
+            <dl className="grid gap-x-12 sm:grid-cols-2">
+              {details.map(([label, value]) => (
+                <div key={label} className="flex items-center justify-between gap-4 border-b border-stone-100 py-3 text-sm">
+                  <dt className="text-stone-500">{label}</dt>
+                  <dd className="text-right font-medium text-stone-900">{value}</dd>
                 </div>
-                <h1 className="mt-4 text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-white sm:text-4xl lg:text-5xl">{name}</h1>
-                <p className="mt-3 flex items-start gap-2 text-sm text-white/70 sm:text-base">
-                  <span className="mt-0.5 text-orange-400">{icons.pin}</span>
-                  {address}
-                </p>
-              </div>
-              <div className="md:text-right">
-                <p className="text-sm text-white/60">Asking price</p>
-                <p className="text-3xl font-bold text-white sm:text-4xl">{formatPrice(price)}</p>
-              </div>
-            </div>
+              ))}
+            </dl>
+          </Section>
 
-            <div data-animate="hero">
-              <PropertyGallery images={gallery} name={name} />
-            </div>
-          </div>
-        </section>
+          <Section title="Features" id="features">
+            <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
+              {features.map((f) => (
+                <li key={f} className="flex items-center gap-3 text-sm text-stone-700">
+                  <span className="shrink-0 text-orange-600">{icons.check}</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </Section>
 
-        {/* Key facts */}
-        <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {facts.map((f) => (
-              <li key={f.label} data-animate="fade-up" className="flex items-center gap-2.5 rounded-2xl border border-stone-200 bg-white p-3 transition hover:border-orange-400 sm:gap-3 sm:p-4">
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-orange-50 text-orange-700 sm:h-10 sm:w-10">{f.icon}</span>
-                <span className="min-w-0">
-                  <span className="block truncate text-sm font-semibold text-stone-900 sm:text-base">{f.value}</span>
-                  <span className="block text-xs text-stone-500">{f.label}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
+          <Section title="Location" id="location">
+            <div className="aspect-[16/9] overflow-hidden rounded-xl border border-stone-200 bg-stone-100">
+              <iframe
+                title={`Map of ${name}`}
+                src={mapSrc}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-full w-full border-0"
+              />
+            </div>
+            <ul className="mt-4 divide-y divide-stone-100">
+              {nearby.map((n) => (
+                <li key={n.name} className="flex items-center justify-between gap-4 py-3 text-sm">
+                  <span className="text-stone-800">{n.name}</span>
+                  <span className="shrink-0 text-stone-500">{n.distance}</span>
+                </li>
+              ))}
+            </ul>
+          </Section>
         </div>
 
-        {/* Main content */}
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-3 lg:px-8 lg:py-14">
-          <div className="min-w-0 space-y-6 lg:col-span-2">
-            <Section title="Overview" id="overview">
-              <p className="text-lg font-medium text-stone-900">{summary}</p>
-              <div className="mt-4 space-y-4 leading-relaxed text-stone-600">
-                {description.map((para) => (
-                  <p key={para.slice(0, 24)}>{para}</p>
-                ))}
-              </div>
-            </Section>
+        <aside className="min-w-0 lg:sticky lg:top-28 lg:self-start">
+          <AgentContact agent={agent} propertyName={name} />
+        </aside>
+      </div>
 
-            <Section title="Property Details" id="details">
-              <dl className="grid gap-x-10 sm:grid-cols-2">
-                {details.map(([label, value]) => (
-                  <div key={label} className="flex items-center justify-between border-b border-stone-100 py-3 text-sm">
-                    <dt className="text-stone-500">{label}</dt>
-                    <dd className="font-semibold text-stone-900">{value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </Section>
-
-            <Section title="Features & Amenities" id="features">
-              <ul className="grid gap-3 sm:grid-cols-2">
-                {features.map((f) => (
-                  <li key={f} className="flex items-center gap-3 rounded-xl bg-stone-50 px-4 py-3 text-sm font-medium text-stone-700">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-orange-500 text-white">{icons.check}</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            </Section>
-
-            <Section title="Location & Nearby" id="location">
-              <div className="aspect-[16/9] overflow-hidden rounded-2xl bg-stone-100">
-                <iframe
-                  title={`Map of ${name}`}
-                  src={mapSrc}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="h-full w-full border-0 grayscale-[30%]"
-                />
-              </div>
-              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                {nearby.map((n) => (
-                  <li key={n.name} className="flex items-center justify-between gap-4 rounded-xl border border-stone-200 px-4 py-3 text-sm">
-                    <span className="flex items-center gap-2 font-medium text-stone-800">
-                      <span className="text-orange-600">{icons.pin}</span>
-                      {n.name}
-                    </span>
-                    <span className="shrink-0 text-stone-500">{n.distance}</span>
-                  </li>
-                ))}
-              </ul>
-            </Section>
-          </div>
-
-          {/* Sidebar */}
-          <aside data-animate="right" className="min-w-0 lg:sticky lg:top-24 lg:self-start">
-            <AgentContact agent={agent} propertyName={name} />
-          </aside>
-        </div>
-
-        {/* Similar properties */}
-        <section className="border-t border-stone-200 bg-white py-16 sm:py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div data-animate="fade-up" className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <h2 className="text-[1.75rem] font-semibold leading-[1.15] tracking-tight min-[400px]:text-3xl text-stone-900 sm:text-4xl">
-                Similar{" "}
-                <span className="bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent">Properties</span>
-              </h2>
-              <Link href="/properties" className="inline-flex items-center gap-2 text-sm font-semibold text-stone-900 transition-colors hover:text-orange-600">
-                View all <ArrowIcon />
+      {similar.length > 0 && (
+        <section className="border-t border-stone-200 py-12 sm:py-16">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="flex items-baseline justify-between gap-4">
+              <h2 className="text-xl font-semibold text-stone-900 sm:text-2xl">Similar properties</h2>
+              <Link href="/properties" className="shrink-0 text-sm font-medium text-orange-700 hover:underline">
+                View all
               </Link>
             </div>
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {similar.map((p) => (
                 <PropertyCard key={p.id} property={p} />
               ))}
             </div>
           </div>
         </section>
-      </main>
-    </>
+      )}
+    </main>
   );
 }

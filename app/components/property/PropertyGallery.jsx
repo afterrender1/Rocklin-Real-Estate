@@ -29,7 +29,7 @@ const PropertyGallery = ({ images, name }) => {
 
   return (
     <div className="relative">
-      <div className="grid h-[320px] grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-3xl sm:h-[420px] sm:gap-3 lg:h-[520px]">
+      <div className="grid h-[280px] grid-cols-4 grid-rows-2 gap-1.5 overflow-hidden rounded-xl sm:h-[400px] lg:h-[460px]">
         {images.map((src, i) => (
           <button
             key={src}
@@ -46,24 +46,18 @@ const PropertyGallery = ({ images, name }) => {
               fill
               preload={i === 0}
               sizes={i === 0 ? "(min-width: 768px) 50vw, 100vw" : "25vw"}
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="object-cover"
             />
-            <span className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/15" />
-            {i === images.length - 1 && (
-              <span className="absolute inset-0 hidden place-items-center bg-black/45 text-sm font-semibold text-white md:grid">
-                View all {images.length} photos
-              </span>
-            )}
+            <span className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
           </button>
         ))}
       </div>
-      {/* Mobile: photo count pill */}
       <button
         type="button"
         onClick={() => setActive(0)}
-        className="absolute bottom-4 right-4 flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-stone-900 shadow backdrop-blur md:hidden"
+        className="absolute bottom-3 right-3 rounded-lg border border-stone-300 bg-white px-3 py-1.5 text-xs font-medium text-stone-900 shadow-sm transition hover:bg-stone-50 sm:text-sm"
       >
-        1 / {images.length} Photos
+        Show all {images.length} photos
       </button>
 
       {active !== null && (
@@ -94,7 +88,7 @@ const PropertyGallery = ({ images, name }) => {
                 type="button"
                 onClick={() => move(dir)}
                 aria-label={dir < 0 ? "Previous photo" : "Next photo"}
-                className={`absolute top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition hover:bg-orange-500 ${
+                className={`absolute top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition hover:bg-white/25 ${
                   dir < 0 ? "left-3 sm:left-6" : "right-3 sm:right-6"
                 }`}
               >
@@ -113,7 +107,7 @@ const PropertyGallery = ({ images, name }) => {
                 onClick={() => setActive(i)}
                 aria-label={`Show photo ${i + 1}`}
                 className={`relative h-14 w-20 shrink-0 overflow-hidden rounded-lg ring-2 transition ${
-                  i === active ? "ring-orange-400" : "opacity-60 ring-transparent hover:opacity-100"
+                  i === active ? "ring-white" : "opacity-60 ring-transparent hover:opacity-100"
                 }`}
               >
                 <Image src={src} alt="" fill sizes="80px" className="object-cover" />

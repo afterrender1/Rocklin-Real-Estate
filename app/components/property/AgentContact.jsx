@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const inputClass =
   // 16px text on phones stops iOS from zooming into inputs on focus
-  "w-full min-w-0 rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-base text-stone-900 sm:text-sm outline-none transition placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-500/10";
+  "w-full min-w-0 rounded-lg border border-stone-300 bg-white px-3.5 py-2.5 text-base text-stone-900 sm:text-sm outline-none transition placeholder:text-stone-400 focus:border-orange-600 focus:ring-2 focus:ring-orange-600/15";
 
 const AgentContact = ({ agent, propertyName }) => {
   const [mode, setMode] = useState("tour");
@@ -18,19 +18,19 @@ const AgentContact = ({ agent, propertyName }) => {
   };
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-xl shadow-stone-900/5">
+    <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
       {/* Agent */}
-      <div className="flex items-center gap-4 border-b border-stone-100 p-6">
+      <div className="flex items-center gap-4 border-b border-stone-100 p-5">
         {agent.image ? (
           <Image
             src={agent.image}
             alt={agent.name}
             width={56}
             height={56}
-            className="h-14 w-14 shrink-0 rounded-full object-cover object-[50%_20%] ring-2 ring-orange-500/30"
+            className="h-14 w-14 shrink-0 rounded-full object-cover object-[50%_20%]"
           />
         ) : (
-          <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-orange-500 to-orange-700 text-lg font-bold text-white">
+          <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-stone-200 text-lg font-semibold text-stone-700">
             {agent.initials}
           </div>
         )}
@@ -46,14 +46,14 @@ const AgentContact = ({ agent, propertyName }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 px-6 pt-5">
-        <a href={`tel:${agent.phone.replace(/[^+\d]/g, "")}`} className="flex items-center justify-center gap-2 rounded-xl border border-stone-200 py-2.5 text-sm font-medium text-stone-700 transition hover:border-orange-500 hover:text-orange-700">
+      <div className="grid grid-cols-2 gap-2 px-5 pt-4">
+        <a href={`tel:${agent.phone.replace(/[^+\d]/g, "")}`} className="flex items-center justify-center gap-2 rounded-lg border border-stone-300 py-2 text-sm font-medium text-stone-700 transition hover:bg-stone-50">
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" />
           </svg>
           Call
         </a>
-        <a href={`mailto:${agent.email}`} className="flex items-center justify-center gap-2 rounded-xl border border-stone-200 py-2.5 text-sm font-medium text-stone-700 transition hover:border-orange-500 hover:text-orange-700">
+        <a href={`mailto:${agent.email}`} className="flex items-center justify-center gap-2 rounded-lg border border-stone-300 py-2 text-sm font-medium text-stone-700 transition hover:bg-stone-50">
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="3" y="5" width="18" height="14" rx="2" />
             <path d="m3 7 9 6 9-6" />
@@ -62,9 +62,9 @@ const AgentContact = ({ agent, propertyName }) => {
         </a>
       </div>
 
-      <div className="p-6">
+      <div className="p-5">
         {/* Tabs */}
-        <div className="grid grid-cols-2 rounded-xl bg-stone-100 p-1 text-sm font-medium">
+        <div className="grid grid-cols-2 border-b border-stone-200 text-sm font-medium">
           {[
             ["tour", "Schedule a Tour"],
             ["info", "Request Info"],
@@ -76,7 +76,7 @@ const AgentContact = ({ agent, propertyName }) => {
                 setMode(key);
                 setSent(false);
               }}
-              className={`rounded-lg py-2 transition ${mode === key ? "bg-white text-stone-900 shadow-sm" : "text-stone-500 hover:text-stone-900"}`}
+              className={`-mb-px border-b-2 py-2.5 transition ${mode === key ? "border-orange-600 text-stone-900" : "border-transparent text-stone-500 hover:text-stone-900"}`}
             >
               {label}
             </button>
@@ -84,8 +84,8 @@ const AgentContact = ({ agent, propertyName }) => {
         </div>
 
         {sent ? (
-          <div className="mt-6 rounded-2xl bg-orange-50 p-6 text-center">
-            <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-orange-500 text-white">
+          <div className="mt-6 rounded-xl bg-stone-50 p-6 text-center">
+            <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-green-600 text-white">
               <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m5 12 5 5 9-10" />
               </svg>
@@ -105,8 +105,8 @@ const AgentContact = ({ agent, propertyName }) => {
                       key={t}
                       type="button"
                       onClick={() => setTourType(t)}
-                      className={`rounded-xl border py-2.5 text-sm font-medium transition ${
-                        tourType === t ? "border-orange-500 bg-orange-50 text-orange-700" : "border-stone-200 text-stone-600 hover:border-stone-300"
+                      className={`rounded-lg border py-2 text-sm font-medium transition ${
+                        tourType === t ? "border-orange-600 bg-orange-50 text-orange-800" : "border-stone-300 text-stone-600 hover:bg-stone-50"
                       }`}
                     >
                       {t}
@@ -135,7 +135,7 @@ const AgentContact = ({ agent, propertyName }) => {
             />
             <button
               type="submit"
-              className="w-full rounded-xl bg-orange-600 py-3.5 text-sm font-semibold text-white transition hover:bg-orange-700 hover:shadow-lg hover:shadow-orange-600/30"
+              className="w-full rounded-lg bg-orange-600 py-3 text-sm font-semibold text-white transition hover:bg-orange-700"
             >
               {mode === "tour" ? "Request a Tour" : "Send Message"}
             </button>
