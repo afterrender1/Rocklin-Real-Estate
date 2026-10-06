@@ -175,6 +175,7 @@ const Footer = () => (
             </svg>
           </a>
         </div>
+        <p className="pb-4 text-center text-[11px] text-stone-400/80">Developed by Devskarnel</p>
       </div>
     </div>
   </footer>
