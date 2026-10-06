@@ -6,17 +6,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Properties", href: "/properties" },
-  {
-    label: "Pages",
-    children: [
-      { label: "Our Agents", href: "/agents" },
-      { label: "FAQ", href: "/faq" },
-      { label: "Contact", href: "/contact" },
-    ],
-  },
+  { label: "Listings", href: "/properties" },
+  { label: "Property Management", href: "/contact" },
+  { label: "Rentals", href: "/properties" },
+  { label: "Agents", href: "/agents" },
+  { label: "About", href: "/about" },
 ];
 
 const isActive = (pathname, href) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
@@ -43,7 +37,7 @@ const Chevron = ({ className = "" }) => (
 );
 
 const desktopLinkClass = (active) =>
-  `relative flex items-center gap-1 py-2 text-sm font-medium transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:rounded-full after:bg-orange-400 after:transition-transform after:duration-300 hover:text-orange-300 hover:after:scale-x-100 ${
+  `relative flex items-center gap-1 whitespace-nowrap py-2 text-sm font-medium transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:rounded-full after:bg-orange-400 after:transition-transform after:duration-300 hover:text-orange-300 hover:after:scale-x-100 ${
     active ? "text-orange-300 after:scale-x-100" : "text-white/90 after:scale-x-0"
   }`;
 
@@ -140,7 +134,7 @@ const Navbar = () => {
               href="/contact"
               className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-orange-500 hover:text-white hover:shadow-lg hover:shadow-orange-500/30"
             >
-              Get In Touch
+              Contact
             </Link>
           </div>
 
@@ -267,7 +261,7 @@ const Navbar = () => {
               onClick={closeMenu}
               className="block rounded-full bg-orange-500 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-orange-400"
             >
-              Get In Touch
+              Contact
             </Link>
             <div className="flex flex-col gap-1 text-sm text-white/60">
               <a href="tel:+13076677665" className="transition-colors hover:text-orange-300">+1 (307) 667-7665</a>

@@ -7,9 +7,11 @@ const columns = [
   {
     title: "Company",
     links: [
-      { label: "About Us", href: "/about" },
-      { label: "Our Agents", href: "/agents" },
-      { label: "Properties", href: "/properties" },
+      { label: "Listings", href: "/properties" },
+      { label: "Property Management", href: "/contact" },
+      { label: "Rentals", href: "/properties" },
+      { label: "Agents", href: "/agents" },
+      { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
     ],
   },
