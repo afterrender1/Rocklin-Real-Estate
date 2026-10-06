@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section className="relative isolate flex min-h-[80vh] items-start overflow-hidden">
       <Image
-        src="/images/sky-hero-bg.webp"
+        src="/images/hero-bg.webp"
         alt="Modern luxury house"
         fill
         preload
