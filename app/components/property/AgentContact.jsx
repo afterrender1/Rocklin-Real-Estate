@@ -37,12 +37,7 @@ const AgentContact = ({ agent, propertyName }) => {
         <div className="min-w-0 flex-1">
           <p className="truncate font-semibold text-stone-900">{agent.name}</p>
           <p className="truncate text-sm text-stone-500">{agent.role}</p>
-          <p className="mt-1 flex items-center gap-1 text-xs text-stone-500">
-            <svg viewBox="0 0 20 20" className="h-3.5 w-3.5 fill-amber-400">
-              <path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.8l-5.3 2.8 1-5.8L1.5 7.7l5.9-.9L10 1.5z" />
-            </svg>
-            {agent.rating.toFixed(1)} · {agent.listings} listings
-          </p>
+          {agent.location && <p className="mt-0.5 truncate text-xs text-stone-500">{agent.location}</p>}
         </div>
       </div>
 

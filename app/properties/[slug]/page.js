@@ -4,6 +4,7 @@ import PropertyCard from "../../components/PropertyCard";
 import PropertyGallery from "../../components/property/PropertyGallery";
 import AgentContact from "../../components/property/AgentContact";
 import { formatListingPrice, formatNumber, getPropertyBySlug, isForRent, properties } from "../../data/properties";
+import { getAgentById } from "../../data/agents";
 
 export function generateStaticParams() {
   return properties.map((p) => ({ slug: p.slug }));
@@ -54,8 +55,9 @@ export default async function PropertyPage({ params }) {
 
   const {
     name, code, address, type, status, beds, baths, area, lotSize,
-    garage, yearBuilt, gallery, description, features, nearby, agent, summary,
+    garage, yearBuilt, gallery, description, features, nearby, agentId, summary,
   } = property;
+  const agent = await getAgentById(agentId);
 
   const facts = [
     { label: "Beds", value: beds, icon: icons.bed },
@@ -188,9 +190,11 @@ export default async function PropertyPage({ params }) {
           </Section>
         </div>
 
-        <aside className="min-w-0 lg:sticky lg:top-28 lg:self-start">
-          <AgentContact agent={agent} propertyName={name} />
-        </aside>
+        {agent && (
+          <aside className="min-w-0 lg:sticky lg:top-28 lg:self-start">
+            <AgentContact agent={agent} propertyName={name} />
+          </aside>
+        )}
       </div>
 
       {similar.length > 0 && (

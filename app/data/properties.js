@@ -10,69 +10,6 @@ const allImages = [
 
 const galleryFor = (image) => [image, ...allImages.filter((img) => img !== image)].slice(0, 5);
 
-export const agents = {
-  sarah: {
-    id: "sarah",
-    name: "Sarah Mitchell",
-    role: "Senior Property Consultant",
-    office: "Los Angeles, US",
-    phone: "+1 (310) 555-0142",
-    email: "sarah@rocklinutah.com",
-    initials: "SM",
-    image: "/images/agents/sarah.png",
-    listings: 48,
-    rating: 4.9,
-    experience: 12,
-    languages: ["English", "French"],
-    bio: "Sarah has spent over a decade matching buyers with coastal and desert homes across Southern California.",
-  },
-  daniel: {
-    id: "daniel",
-    name: "Daniel Ortega",
-    role: "Luxury Homes Specialist",
-    office: "Marbella, ES",
-    phone: "+34 612 555 019",
-    email: "daniel@rocklinutah.com",
-    initials: "DO",
-    image: "/images/agents/daniel.png",
-    listings: 36,
-    rating: 4.8,
-    experience: 9,
-    languages: ["Spanish", "English", "German"],
-    bio: "Daniel specialises in Mediterranean villas and helps international buyers navigate the Spanish market.",
-  },
-  lena: {
-    id: "lena",
-    name: "Lena Fischer",
-    role: "International Sales Director",
-    office: "Zurich, CH",
-    phone: "+41 44 555 0187",
-    email: "lena@rocklinutah.com",
-    initials: "LF",
-    image: "/images/agents/lena.png",
-    listings: 52,
-    rating: 5.0,
-    experience: 15,
-    languages: ["German", "English", "Italian"],
-    bio: "Lena leads our international team and advises investors on premium residential property in Switzerland.",
-  },
-  omar: {
-    id: "omar",
-    name: "Omar Haddad",
-    role: "Investment Advisor",
-    office: "Dubai, AE",
-    phone: "+971 4 555 0193",
-    email: "omar@rocklinutah.com",
-    initials: "OH",
-    image: "/images/agents/omar.png",
-    listings: 29,
-    rating: 4.9,
-    experience: 8,
-    languages: ["Arabic", "English", "Urdu"],
-    bio: "Omar helps clients build rental and resale portfolios with a focus on long-term returns.",
-  },
-};
-
 export const properties = [
   {
     id: 1,
@@ -103,7 +40,7 @@ export const properties = [
       { name: "St. George Regional Airport", distance: "15 min drive" },
       { name: "Downtown St. George", distance: "10 min drive" }
     ],
-    agent: agents.sarah,
+    agentId: "damon-stewart",
   },
   {
     id: 2,
@@ -134,7 +71,7 @@ export const properties = [
       { name: "St. George Regional Airport", distance: "15 min drive" },
       { name: "Downtown St. George", distance: "10 min drive" }
     ],
-    agent: agents.sarah,
+    agentId: "damon-stewart",
   },
   {
     id: 3,
@@ -165,7 +102,7 @@ export const properties = [
       { name: "St. George Regional Airport", distance: "15 min drive" },
       { name: "Downtown St. George", distance: "10 min drive" }
     ],
-    agent: agents.sarah,
+    agentId: "damon-stewart",
   },
   {
     id: 4,
@@ -196,7 +133,7 @@ export const properties = [
       { name: "St. George Regional Airport", distance: "15 min drive" },
       { name: "Downtown St. George", distance: "10 min drive" }
     ],
-    agent: agents.sarah,
+    agentId: "damon-stewart",
   },
   {
     id: 5,
@@ -227,7 +164,7 @@ export const properties = [
       { name: "St. George Regional Airport", distance: "15 min drive" },
       { name: "Downtown St. George", distance: "10 min drive" }
     ],
-    agent: agents.sarah,
+    agentId: "damon-stewart",
   },
   {
     id: 6,
@@ -258,7 +195,7 @@ export const properties = [
       { name: "St. George Regional Airport", distance: "15 min drive" },
       { name: "Downtown St. George", distance: "10 min drive" }
     ],
-    agent: agents.sarah,
+    agentId: "damon-stewart",
   },
 ].map((p) => ({ ...p, gallery: galleryFor(p.image) }));
 
@@ -269,7 +206,7 @@ export const formatPrice = (value) =>
 
 export const formatNumber = (value) => new Intl.NumberFormat("en-US").format(value);
 
-export const getAgentListings = (agentId) => properties.filter((p) => p.agent.id === agentId);
+export const getAgentListings = (agentId) => properties.filter((p) => p.agentId === agentId);
 
 export const isForRent = (property) => property.status === "For Rent";
 
