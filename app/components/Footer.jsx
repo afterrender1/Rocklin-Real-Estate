@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaFacebookF, FaInstagram, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import ShaderBackground from "./ShaderBackground";
 import { contact } from "../data/contact";
 import { site } from "../data/site";
@@ -36,7 +37,10 @@ const contacts = [
 ];
 
 const socials = [
-  { label: "Facebook", href: site.facebook || "https://www.facebook.com", d: <><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M15 8h-2a2 2 0 0 0-2 2v11M9 13h6" /></> },
+  { label: "Facebook", href: site.socials.facebook || "https://www.facebook.com", Icon: FaFacebookF },
+  { label: "Instagram", href: site.socials.instagram || "https://www.instagram.com", Icon: FaInstagram },
+  { label: "YouTube", href: site.socials.youtube || "https://www.youtube.com", Icon: FaYoutube },
+  { label: "X (Twitter)", href: site.socials.twitter || "https://x.com", Icon: FaXTwitter },
 ];
 
 const Footer = () => (
@@ -147,9 +151,7 @@ const Footer = () => (
                     aria-label={s.label}
                     className="grid h-10 w-10 place-items-center rounded-xl border border-stone-200 bg-white text-stone-700 transition hover:border-orange-500 hover:bg-orange-500 hover:text-white"
                   >
-                    <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      {s.d}
-                    </svg>
+                    <s.Icon className="h-4 w-4" aria-hidden="true" />
                   </a>
                 </li>
               ))}
@@ -175,7 +177,17 @@ const Footer = () => (
             </svg>
           </a>
         </div>
-        <p className="pb-4 text-center text-[11px] text-stone-400/80">Developed by Devskarnel</p>
+        <p className="pb-4 text-center text-[11px] text-stone-400/80">
+          Developed by{" "}
+          <a
+            href="https://www.devskarnel.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline-offset-2 transition-colors hover:text-stone-600 hover:underline"
+          >
+            Devskarnel
+          </a>
+        </p>
       </div>
     </div>
   </footer>

@@ -7,8 +7,13 @@ export const site = {
   name: "Rocklin Real Estate",
   description:
     "New-construction homes for buyers and full-service property management for owners, across Southern and Northern Utah.",
-  // Set to the real page, e.g. "https://www.facebook.com/rocklinrealestate"
-  facebook: "",
+  // Social profiles: set each to the real page URL, e.g. "https://www.instagram.com/rocklinrealestate"
+  socials: {
+    facebook: "",
+    instagram: "",
+    youtube: "",
+    twitter: "",
+  },
   keywords: [
     "St. George real estate",
     "St. George homes for sale",
@@ -85,5 +90,5 @@ export const organizationSchema = {
     opens: "09:00",
     closes: "17:00",
   },
-  ...(site.facebook && { sameAs: [site.facebook] }),
+  ...(Object.values(site.socials).some(Boolean) && { sameAs: Object.values(site.socials).filter(Boolean) }),
 };
