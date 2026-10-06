@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import PropertyCard from "../../components/PropertyCard";
 import PropertyGallery from "../../components/property/PropertyGallery";
 import AgentContact from "../../components/property/AgentContact";
-import { formatNumber, formatPrice, getPropertyBySlug, properties } from "../../data/properties";
+import { formatListingPrice, formatNumber, getPropertyBySlug, isForRent, properties } from "../../data/properties";
 
 export function generateStaticParams() {
   return properties.map((p) => ({ slug: p.slug }));
@@ -53,7 +53,7 @@ export default async function PropertyPage({ params }) {
   if (!property) notFound();
 
   const {
-    name, code, address, price, type, status, beds, baths, area, lotSize,
+    name, code, address, type, status, beds, baths, area, lotSize,
     garage, yearBuilt, gallery, description, features, nearby, agent, summary,
   } = property;
 
@@ -69,7 +69,7 @@ export default async function PropertyPage({ params }) {
   const details = [
     ["Property type", type],
     ["Status", status],
-    ["Price", formatPrice(price)],
+    [isForRent(property) ? "Monthly rent" : "Price", formatListingPrice(property)],
     ["Living area", `${formatNumber(area)} sqft`],
     ["Lot size", `${formatNumber(lotSize)} sqft`],
     ["Bedrooms", beds],
@@ -112,8 +112,8 @@ export default async function PropertyPage({ params }) {
             </p>
           </div>
           <div className="shrink-0 md:text-right">
-            <p className="text-2xl font-semibold text-stone-900 sm:text-3xl">{formatPrice(price)}</p>
-            <p className="text-sm text-stone-500">Asking price</p>
+            <p className="text-2xl font-semibold text-stone-900 sm:text-3xl">{formatListingPrice(property)}</p>
+            <p className="text-sm text-stone-500">{isForRent(property) ? "Monthly rent" : "Asking price"}</p>
           </div>
         </header>
 

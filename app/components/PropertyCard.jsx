@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { formatNumber, formatPrice } from "../data/properties";
+import { formatListingPrice, formatNumber } from "../data/properties";
 
 export const ArrowIcon = ({ className = "" }) => (
   <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`h-4 w-4 ${className}`}>
@@ -13,7 +13,7 @@ export const ArrowIcon = ({ className = "" }) => (
 
 const PropertyCard = ({ property, className = "" }) => {
   const [liked, setLiked] = useState(false);
-  const { slug, name, location, code, price, beds, baths, area, image, status } = property;
+  const { slug, name, location, code, beds, baths, area, image, status } = property;
 
   return (
     <article data-animate="fade-up" className={`group relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg shadow-slate-900/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${className}`}>
@@ -48,7 +48,7 @@ const PropertyCard = ({ property, className = "" }) => {
 
       {/* Content */}
       <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-        <p className="text-xs font-semibold text-orange-300 sm:text-sm">{formatPrice(price)}</p>
+        <p className="text-xs font-semibold text-orange-300 sm:text-sm">{formatListingPrice(property)}</p>
         <h3 className="mt-0.5 line-clamp-2 text-base font-bold leading-snug text-white min-[400px]:text-lg sm:text-xl">{name}</h3>
 
         <div className="mt-2 flex items-end justify-between gap-3">

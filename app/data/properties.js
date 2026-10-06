@@ -205,9 +205,9 @@ export const properties = [
     location: "St. George",
     address: "1115 W Albertine Ln, St. George, UT 84790",
     code: "US",
-    price: 422000,
+    price: 2250,
     type: "Townhome",
-    status: "For Sale",
+    status: "For Rent",
     beds: 3,
     baths: 2.5,
     area: 1809,
@@ -236,9 +236,9 @@ export const properties = [
     location: "St. George",
     address: "1117 W Albertine Ln, St. George, UT 84790",
     code: "US",
-    price: 435000,
+    price: 2400,
     type: "Townhome",
-    status: "For Sale",
+    status: "For Rent",
     beds: 3,
     baths: 2.5,
     area: 1809,
@@ -249,7 +249,7 @@ export const properties = [
     summary: "The flagship Poppy design offering luxury finishes in St. George.",
     description: [
       "The final gem of our current Poppy release, this townhome features premium trim work, custom lighting packages, and a spacious open-concept main level.",
-      "Ready for move-in this coming November 2026, it represents an exceptional opportunity in Rockland Townhomes."
+      "Available to rent from November 2026, it is an exceptional opportunity to live in Rockland Townhomes."
     ],
     features: ["Custom lighting", "Premium trim work", "Energy-efficient", "2-car garage", "Open-concept layout", "Spacious yard"],
     nearby: [
@@ -270,3 +270,8 @@ export const formatPrice = (value) =>
 export const formatNumber = (value) => new Intl.NumberFormat("en-US").format(value);
 
 export const getAgentListings = (agentId) => properties.filter((p) => p.agent.id === agentId);
+
+export const isForRent = (property) => property.status === "For Rent";
+
+// Rentals show a monthly price, e.g. "$2,250/mo"
+export const formatListingPrice = (property) => `${formatPrice(property.price)}${isForRent(property) ? "/mo" : ""}`;
