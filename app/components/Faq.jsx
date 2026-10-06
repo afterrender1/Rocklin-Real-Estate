@@ -68,15 +68,14 @@ const Faq = ({ hideHeading = false }) => {
           </div>
         )}
 
-        <div className={`grid grid-cols-[minmax(0,1fr)] gap-6 sm:gap-8 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-14 ${hideHeading ? "" : "mt-12 sm:mt-16"}`}>
-          {/* Categories */}
-          <nav data-animate="left" aria-label="FAQ categories" className="relative min-w-0 lg:sticky lg:top-28 lg:self-start">
-            <p className="mb-4 hidden text-sm font-semibold uppercase tracking-wider text-orange-700 lg:block">Categories</p>
-            <ul className="-mx-4 flex snap-x gap-2 overflow-x-auto scroll-px-4 px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
+        <div className={`mx-auto max-w-4xl ${hideHeading ? "" : "mt-10 sm:mt-14"}`}>
+          {/* Categories: swipeable row on phones, centred wrapping pills from md up */}
+          <nav data-animate="fade-up" aria-label="FAQ categories" className="relative">
+            <ul className="-mx-4 flex snap-x gap-2 overflow-x-auto scroll-px-4 px-4 py-1 [scrollbar-width:none] sm:-mx-6 sm:px-6 md:mx-0 md:flex-wrap md:justify-center md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden">
               {faqCategories.map((c) => {
                 const active = c.id === activeCat;
                 return (
-                  <li key={c.id} className="shrink-0 snap-start lg:shrink">
+                  <li key={c.id} className="shrink-0 snap-start">
                     <button
                       type="button"
                       onClick={(e) => {
@@ -85,24 +84,31 @@ const Faq = ({ hideHeading = false }) => {
                         e.currentTarget.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
                       }}
                       aria-current={active ? "true" : undefined}
-                      className={`w-full whitespace-nowrap rounded-full border px-4 py-2 text-left text-sm transition-colors lg:rounded-none lg:border-0 lg:border-l-2 lg:py-2.5 ${
+                      className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200 sm:px-5 sm:py-2.5 ${
                         active
-                          ? "border-orange-500 bg-orange-50 font-semibold text-orange-800 lg:bg-transparent lg:text-stone-900"
-                          : "border-stone-200 text-stone-500 hover:text-orange-700 lg:border-transparent"
+                          ? "border-orange-500 bg-orange-500 text-white shadow-md shadow-orange-500/25"
+                          : "border-stone-200 bg-white text-stone-600 hover:border-orange-300 hover:text-orange-700"
                       }`}
                     >
                       {c.label}
+                      <span
+                        className={`grid h-5 min-w-5 place-items-center rounded-full px-1.5 text-[11px] font-semibold ${
+                          active ? "bg-white/25 text-white" : "bg-stone-100 text-stone-500"
+                        }`}
+                      >
+                        {c.faqs.length}
+                      </span>
                     </button>
                   </li>
                 );
               })}
             </ul>
             {/* Hint that the pill row scrolls sideways */}
-            <span aria-hidden="true" className="pointer-events-none absolute -right-4 top-0 h-[calc(100%-0.5rem)] w-10 bg-gradient-to-l from-white to-transparent sm:-right-6 lg:hidden" />
+            <span aria-hidden="true" className="pointer-events-none absolute -right-4 top-0 h-full w-10 bg-gradient-to-l from-white to-transparent sm:-right-6 md:hidden" />
           </nav>
 
           {/* Questions */}
-          <div data-animate="fade-up" className="min-w-0">
+          <div data-animate="fade-up" className="mt-8 min-w-0 sm:mt-10">
             <ul key={activeCat} className="animate-fade-in space-y-3">
               {category.faqs.map((item, i) => {
                 const open = openIndex === i;
