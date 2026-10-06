@@ -1,104 +1,81 @@
-import PageHeader from "../components/PageHeader";
+import Link from "next/link";
 import ContactForm from "../components/ContactForm";
+import { contact } from "../data/contact";
 
 export const metadata = {
   title: "Contact | Rocklin Real Estate",
-  description: "Get in touch with Rocklin Real Estate. Our agents reply within one business day.",
+  description: "Get in touch with Rocklin Real Estate. We reply within one business day.",
 };
 
-const icon = (d) => (
-  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    {d}
-  </svg>
+const Row = ({ label, children }) => (
+  <div className="grid gap-1 border-b border-stone-200 py-5 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-4">
+    <dt className="text-sm text-stone-500">{label}</dt>
+    <dd className="text-stone-900">{children}</dd>
+  </div>
 );
 
-const contactInfo = [
-  {
-    label: "Call us",
-    value: "+1 (307) 667-7665",
-    href: "tel:+13076677665",
-    icon: icon(<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" />),
-  },
-  {
-    label: "Email us",
-    value: "arham@afterrender.com",
-    href: "mailto:arham@afterrender.com",
-    icon: icon(<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>),
-  },
-  {
-    label: "Office hours",
-    value: "Mon – Sat, 9:00 AM – 7:00 PM",
-    icon: icon(<><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>),
-  },
-];
-
-const offices = [
-  { city: "Los Angeles", address: "9454 Wilshire Blvd, Beverly Hills, CA" },
-  { city: "Marbella", address: "Av. Ricardo Soriano 12, Marbella" },
-  { city: "Zurich", address: "Bahnhofstrasse 45, 8001 Zürich" },
-  { city: "Dubai", address: "Boulevard Plaza, Downtown Dubai" },
-];
+const linkClass = "underline-offset-4 hover:text-orange-700 hover:underline";
 
 export default function ContactPage() {
   return (
-    <main className="bg-stone-50">
-      <PageHeader
-        crumb="Contact"
-        title="Let's Find Your"
-        highlight="Perfect Home"
-        description="Tell us what you're looking for and an agent will reach out within one business day."
-      />
+    <main className="bg-white">
+      {/* Solid strip behind the transparent navbar */}
+      <div className="h-20 bg-stone-950 sm:h-24" />
 
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-5 lg:gap-12 lg:px-8 lg:py-20">
-        {/* Info */}
-        <div data-animate="left" className="space-y-4 lg:col-span-2">
-          {contactInfo.map((c) => {
-            const content = (
-              <>
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-orange-50 text-orange-700 transition-colors group-hover:bg-orange-500 group-hover:text-white">
-                  {c.icon}
-                </span>
-                <span>
-                  <span className="block text-sm text-stone-500">{c.label}</span>
-                  <span className="block font-semibold text-stone-900">{c.value}</span>
-                </span>
-              </>
-            );
-            const cls = "group flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-5 transition-colors hover:border-orange-400";
-            return c.href ? (
-              <a key={c.label} href={c.href} className={cls}>{content}</a>
-            ) : (
-              <div key={c.label} className={cls}>{content}</div>
-            );
-          })}
+      <div className="mx-auto max-w-6xl px-4 pb-20 sm:px-6 lg:px-8">
+        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 pt-6 text-sm text-stone-500">
+          <Link href="/" className="hover:text-stone-900 hover:underline">Home</Link>
+          <span aria-hidden="true">›</span>
+          <span className="text-stone-900">Contact</span>
+        </nav>
 
-          <div className="rounded-2xl border border-stone-200 bg-white p-5">
-            <p className="font-semibold text-stone-900">Our offices</p>
-            <ul className="mt-4 space-y-3">
-              {offices.map((o) => (
-                <li key={o.city} className="flex gap-3 text-sm">
-                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-orange-500" />
-                  <span>
-                    <span className="block font-medium text-stone-800">{o.city}</span>
-                    <span className="text-stone-500">{o.address}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <header className="mt-8 max-w-2xl">
+          <h1 className="text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">Contact us</h1>
+          <p className="mt-3 leading-relaxed text-stone-600 sm:text-lg">
+            Buying, selling, renting or need help managing a property? Send us a message and we&apos;ll get back to you
+            within one business day.
+          </p>
+        </header>
+
+        <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16">
+          <section aria-labelledby="details-heading">
+            <h2 id="details-heading" className="text-lg font-semibold text-stone-900">Get in touch</h2>
+            <dl className="mt-3 border-t border-stone-200">
+              <Row label="Phone">
+                <a href={contact.phoneHref} className={linkClass}>{contact.phone}</a>
+              </Row>
+              <Row label="Email">
+                <a href={`mailto:${contact.email}`} className={`break-all ${linkClass}`}>{contact.email}</a>
+              </Row>
+              <Row label="Office">
+                <a href={contact.mapsUrl} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                  {contact.address}
+                </a>
+              </Row>
+              <Row label="Hours">
+                <ul className="space-y-1">
+                  {contact.hours.map(([days, time]) => (
+                    <li key={days}>
+                      {days}: <span className="text-stone-600">{time}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Row>
+            </dl>
+          </section>
+
+          <section aria-labelledby="form-heading">
+            <h2 id="form-heading" className="text-lg font-semibold text-stone-900">Send a message</h2>
+            <div className="mt-3">
+              <ContactForm />
+            </div>
+          </section>
         </div>
 
-        {/* Form */}
-        <div data-animate="fade-up" className="lg:col-span-3">
-          <ContactForm />
-        </div>
-      </div>
-
-      <div data-animate="fade-up" className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
-        <div className="aspect-[16/9] overflow-hidden rounded-3xl border border-stone-200 bg-stone-100 sm:aspect-[21/9]">
+        <div className="mt-16 aspect-[16/9] overflow-hidden rounded-xl border border-stone-200 bg-stone-100 sm:aspect-[21/9]">
           <iframe
-            title="Rocklin Los Angeles office"
-            src={`https://maps.google.com/maps?q=${encodeURIComponent(offices[0].address)}&z=14&output=embed`}
+            title="Rocklin Real Estate office, St. George"
+            src={`https://maps.google.com/maps?q=${encodeURIComponent(contact.address)}&z=15&output=embed`}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             className="h-full w-full border-0"

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { contact } from "../data/contact";
 
 const navLinks = [
   { label: "Listings", href: "/properties" },
@@ -264,8 +265,8 @@ const Navbar = () => {
               Contact
             </Link>
             <div className="flex flex-col gap-1 text-sm text-white/60">
-              <a href="tel:+13076677665" className="transition-colors hover:text-orange-300">+1 (307) 667-7665</a>
-              <a href="mailto:arham@afterrender.com" className="transition-colors hover:text-orange-300">arham@afterrender.com</a>
+              <a href={contact.phoneHref} className="transition-colors hover:text-orange-300">{contact.phone}</a>
+              <a href={`mailto:${contact.email}`} className="transition-colors hover:text-orange-300">{contact.email}</a>
             </div>
           </div>
         </aside>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ShaderBackground from "./ShaderBackground";
+import { contact } from "../data/contact";
 
 const exploreLinks = [
   { label: "Listings", href: "/properties" },
@@ -11,14 +12,11 @@ const exploreLinks = [
 ];
 
 const legalLinks = [
-  { label: "Privacy policy", href: "/privacy-policy" },
-  { label: "Terms and conditions", href: "/terms-and-conditions" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms & Conditions", href: "/terms-and-conditions" },
 ];
 
-const hours = [
-  ["Monday – Friday", "9 AM – 5 PM"],
-  ["Saturday – Sunday", "By appointment"],
-];
+const { hours } = contact;
 
 const icon = (d) => (
   <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -27,11 +25,11 @@ const icon = (d) => (
 );
 
 const contacts = [
-  { label: "(801) 425-3478", href: "tel:+18014253478", icon: icon(<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" />) },
-  { label: "arham@afterrender.com", href: "mailto:arham@afterrender.com", icon: icon(<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>) },
+  { label: contact.phone, href: contact.phoneHref, icon: icon(<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" />) },
+  { label: contact.email, href: `mailto:${contact.email}`, icon: icon(<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>) },
   {
-    label: "720 S River Rd, Suite B110, St. George, UT 84790",
-    href: "https://maps.google.com/?q=720+S+River+Rd+Suite+B110+St.+George+UT+84790",
+    label: contact.address,
+    href: contact.mapsUrl,
     icon: icon(<><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z" /><circle cx="12" cy="9.5" r="2.5" /></>),
   },
 ];
@@ -159,7 +157,7 @@ const Footer = () => (
         </div>
 
         <div className="flex flex-col gap-4 border-t border-stone-200 py-6 text-sm text-stone-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Devskarnel. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Rocklin Real Estate. All rights reserved.</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {legalLinks.map((l) => (
               <li key={l.href}>
